@@ -1,0 +1,8 @@
+# Original source files stay on your computer; the site uses the optimized copies in assets/
+Works/
+Banner.png
+PFP.jpg
+*.NEF
+.DS_Store
+Thumbs.db
+.claude/
