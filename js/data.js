@@ -3,9 +3,9 @@
 const SITE = {
   name: "Luca Tomaselli",
   github: "https://github.com/LucaTommy",
-  email: "", // add your email to show a "Write me" button, e.g. "name@mail.com"
+  email: "lucatomaselli06@gmail.com",
   instagram: "", // optional
-  linkedin: "", // optional
+  linkedin: "https://www.linkedin.com/in/luca-tomaselli-1206043a8/",
 };
 
 // Image helper: every asset exists as name.webp (large) and name-sm.webp (grid)
@@ -51,6 +51,7 @@ const PRODUCTS = [
   },
   {
     id: "chocolate",
+    cutout: true, // transparent PNGs: show whole, no crop
     ratio: "5 / 4",
     title: "Hex Bar",
     kicker: "Product · unibz",
@@ -82,14 +83,21 @@ const SOS = [
     title: "Tuturama",
     place: "Tuturano, Brindisi",
     text:
-      "A 1-bit pixel adventure set in Tuturano: walk the village, find the bar, the castle and the people who live there. Made during Scuola Open Source, alongside a site concept for Galahouse — the old covered market turned into a cultural space.",
-    tags: ["Game", "Pixel art", "Web"],
+      "A 1-bit pixel adventure set in Tuturano: walk the village, find the bar, the castle and the people who live there. Made during Scuola Open Source.",
+    tags: ["Game", "Pixel art"],
     images: [
       img("personal-sos-tuturano/tuturama", "Tuturama game map"),
       img("personal-sos-tuturano/tuturama-2", "Tuturama dialogue"),
-      img("personal-sos-tuturano/concept-galahouse", "Galahouse website hero"),
-      img("personal-sos-tuturano/concept-galahouse2", "Galahouse website about"),
     ],
+    // a small side project, shown as a footnote under the main one
+    extra: {
+      title: "Galahouse",
+      line: "Concept website for a small part of Tuturano — the old covered market.",
+      images: [
+        img("personal-sos-tuturano/concept-galahouse", "Galahouse website hero"),
+        img("personal-sos-tuturano/concept-galahouse2", "Galahouse website about"),
+      ],
+    },
   },
   {
     id: "luce",
@@ -111,4 +119,9 @@ const TOOLS = [
   { title: "Reader", line: "Videos, websites, audio — turned into something to read.", images: [img("personal-tools/reader")] },
   { title: "Sprite Editor", line: "Pixel-art sprites and frame animation for my games.", images: [img("personal-tools/sprouteeditor")] },
   { title: "Grain", line: "Layer noise and textures over photos, non-destructively.", images: [img("personal-tools/texture-editor")] },
+];
+
+// 3D models on the print bed. Put an STL in Models/, run tools/build_assets.py, add a line here.
+const MODELS = [
+  { name: "3DBenchy", file: "assets/models/benchy.glb", credit: "3DBenchy by Creative Tools · CC BY-ND 4.0", layer: 0.2 },
 ];

@@ -31,6 +31,7 @@ body {
   overflow-x: clip;
 }
 img { display: block; max-width: 100%; height: auto; }
+[hidden] { display: none !important; }
 a { color: inherit; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
@@ -57,23 +58,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .nav__links a:hover::after, .nav__cta:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav__cta { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
 @media (max-width: 640px) { .nav__links { display: none; } }
-
-/* ───────── Print progress ───────── */
-.print {
-  position: fixed; right: var(--gutter); bottom: 16px; z-index: 40;
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 12px; border-radius: 999px;
-  background: var(--ink); color: var(--paper);
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
-  transition: transform 0.4s var(--ease), opacity 0.4s;
-}
-.print__dot { width: 7px; height: 7px; border-radius: 50%; background: #3dff8a; animation: blink 1.2s steps(2) infinite; }
-.print.done .print__dot { background: var(--accent); animation: none; }
-.print__layer { opacity: 0.55; }
-.print__bar { width: 70px; height: 3px; background: rgba(255, 255, 255, 0.18); border-radius: 2px; overflow: hidden; }
-.print__bar i { display: block; height: 100%; width: 100%; background: currentColor; transform-origin: left; transform: scaleX(0); }
-@keyframes blink { 50% { opacity: 0.2; } }
-@media (max-width: 640px) { .print__layer, .print__bar { display: none; } }
 
 /* ───────── Hero ───────── */
 [data-grid] {
@@ -240,6 +224,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .case:nth-child(even) .case__media { order: 0; }
 }
 
+/* Cut-out product shots: whole object, no crop, no box */
+.case--cutout .case__media img { object-fit: contain; }
+.case--cutout .thumbs button { background: rgba(255, 255, 255, 0.06); }
+.case--cutout .thumbs img { object-fit: contain; padding: 4px; }
+
 /* ───────── SOS ───────── */
 .sos { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 3vw, 40px); }
 @media (max-width: 900px) { .sos { grid-template-columns: 1fr; } }
@@ -258,6 +247,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sos__title { margin: 0; font-size: clamp(32px, 4vw, 60px); line-height: 0.9; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; font-variation-settings: "wdth" 118; }
 .sos__place { color: var(--muted); }
 .sos__text { margin: 0; color: var(--muted); max-width: 52ch; }
+/* small footnote project under a main one */
+.extra {
+  display: grid; grid-template-columns: 88px 1fr auto; gap: 14px; align-items: center; width: 100%; max-width: 520px;
+  padding: 10px; border: 1px dashed var(--line); text-align: left; font-size: 14px; line-height: 1.35; color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.extra:hover { border-color: var(--ink); color: var(--ink); }
+.extra img { width: 88px; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid var(--line); }
+.extra b { display: block; margin-bottom: 2px; color: var(--ink); font-size: 11px; }
 
 /* ───────── Tools ───────── */
 .tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 28px) clamp(12px, 1.6vw, 22px); }
@@ -273,21 +271,66 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .tool:hover .tool__name { color: var(--accent); }
 .tool__line { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.4; }
 
-/* ───────── Hobby ───────── */
-.hobby { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
-.hobby__img { margin: 0; background: #fff; border-radius: 4px; }
-.hobby__img img { mix-blend-mode: multiply; }
+/* ───────── Hobby + print bed ───────── */
+.hobby { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
 .hobby__cols { display: grid; gap: 28px; }
 .hobby__cols h3 { margin: 0 0 8px; font-size: 12px; }
 .hobby__cols p { margin: 0; font-size: clamp(18px, 1.7vw, 23px); line-height: 1.35; }
-.hobby__now { padding: 14px 16px; border: 1px dashed rgba(255, 255, 255, 0.6); line-height: 1.6; text-transform: none; font-size: 13px; }
+.hobby__now { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; padding: 14px 16px; border: 1px dashed rgba(255, 255, 255, 0.6); }
+.hobby__now p { font-size: 13px !important; line-height: 1.6 !important; text-transform: none; font-family: var(--mono); }
 .hobby__now span { text-transform: uppercase; opacity: 0.7; }
-@media (max-width: 800px) { .hobby { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .hobby { grid-template-columns: 1fr; } }
 
+.bed { display: grid; gap: 12px; }
+.bed__view {
+  position: relative; aspect-ratio: 4 / 3; border: 1px solid rgba(255, 255, 255, 0.45);
+  background: radial-gradient(ellipse at 50% 60%, rgba(255, 255, 255, 0.12), transparent 70%);
+}
+.bed__view.drag { background-color: rgba(255, 255, 255, 0.12); outline: 2px dashed #fff; outline-offset: -10px; }
+.bed__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+.bed__canvas:active { cursor: grabbing; }
+.bed.touch-on .bed__canvas { touch-action: none; }
+/* CAD viewport corner ticks */
+.bed__corner { position: absolute; width: 14px; height: 14px; border: 0 solid #fff; pointer-events: none; }
+.bed__corner.tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+.bed__corner.tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.bed__corner.bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+.bed__corner.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+.bed__hud { position: absolute; left: 30px; right: 30px; display: flex; justify-content: space-between; gap: 12px; pointer-events: none; font-size: 11px; }
+.bed__hud--top { top: 12px; }
+.bed__hud--bottom { bottom: 12px; }
+.bed__hud b { font-weight: 500; opacity: 0.6; }
+.bed__hint { position: absolute; left: 0; right: 0; bottom: 38px; margin: 0; text-align: center; font-size: 10px; opacity: 0.7; pointer-events: none; transition: opacity 0.5s; }
+.bed__hint.gone { opacity: 0; }
+.bed__fallback { position: absolute; inset: 10%; width: 80%; height: 80%; object-fit: contain; }
+
+.bed__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.bed__controls button, .bed__upload {
+  padding: 9px 14px; border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 999px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.bed__controls button:hover, .bed__upload:hover, .bed__controls [aria-pressed="true"] { background: #fff; color: var(--accent); }
+.bed__play { background: #fff; color: var(--accent); min-width: 108px; }
+.bed__play:hover { background: var(--ink) !important; color: #fff !important; border-color: var(--ink) !important; }
+.bed__modes { display: flex; }
+.bed__modes button { border-radius: 0; margin-left: -1px; }
+.bed__modes button:first-child { border-radius: 999px 0 0 999px; }
+.bed__modes button:last-child { border-radius: 0 999px 999px 0; }
+.bed__touch { display: none; }
+@media (pointer: coarse) { .bed__touch { display: inline-block; } }
+.bed__slider { flex: 1 1 180px; display: flex; align-items: center; gap: 10px; }
+.bed__slider input { flex: 1; accent-color: #fff; height: 24px; cursor: ew-resize; }
+.bed__credit { margin: 0; font-size: 10px; opacity: 0.65; text-transform: none; }
+@media (max-width: 520px) {
+  .bed__view { aspect-ratio: 1; }
+  .bed__hint { display: none; }
+}
 /* ───────── About ───────── */
 .about { display: grid; grid-template-columns: 0.8fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; }
-.about__img { margin: 0; background: #fff; }
-.about__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 85%; }
+.about__img { margin: 0; position: relative; }
+/* cut-out portrait standing on a CAD grid */
+.about__img::before { content: ""; position: absolute; inset: 12% 0 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 32px 32px; border-top: 1px solid var(--ink); }
+.about__img img { position: relative; width: 100%; }
 .about__text p { max-width: 48ch; font-size: clamp(18px, 1.5vw, 21px); }
 .about__big { margin: 14px 0 24px; font-size: clamp(44px, 7vw, 112px); line-height: 0.88; font-weight: 900; letter-spacing: -0.035em; text-transform: uppercase; font-variation-settings: "wdth" 115; }
 .about__list { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--line); }

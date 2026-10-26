@@ -1,7 +1,7 @@
 """Turn the raw files in Works/ into light web assets in assets/.
 
 Run:  python tools/build_assets.py
-Needs: pip install pymupdf rawpy pillow
+Needs: pip install pymupdf rawpy pillow trimesh fast-simplification
 """
 import io
 import json
@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pymupdf
 import rawpy
+import trimesh
 from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -18,6 +19,7 @@ OUT = ROOT / "assets"
 
 FULL_W = 1400   # width of large images (lightbox)
 THUMB_W = 640   # width of grid images
+MAX_FACES = 60000  # triangles per 3D model, keeps each file well under 1 MB
 
 
 def slug(s):
@@ -25,7 +27,10 @@ def slug(s):
 
 
 def save(img, dest, width):
-    img = ImageOps.exif_transpose(img).convert("RGB")
+    img = ImageOps.exif_transpose(img)
+    # keep transparency for cut-out PNGs, flatten everything else
+    transparent = "A" in img.getbands() and img.getchannel("A").getextrema()[0] < 255
+    img = img.convert("RGBA" if transparent else "RGB")
     if img.width > width:
         img = img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -100,7 +105,19 @@ def main():
             manifest[key].append(entry)
         print("img", folder, len(files))
 
-    manifest["me"] = [both(Image.open(ROOT / "PFP.jpg"), "me", "portrait"),
+    # 3D models for the print bed: STL in, light GLB out (centred on the bed, sitting on Z=0)
+    for stl in sorted(ROOT.glob("Models/*.stl")):
+        mesh = trimesh.load(stl)
+        if len(mesh.faces) > MAX_FACES:
+            mesh = mesh.simplify_quadric_decimation(face_count=MAX_FACES)
+        lo, hi = mesh.bounds
+        mesh.apply_translation([-(lo[0] + hi[0]) / 2, -(lo[1] + hi[1]) / 2, -lo[2]])
+        dest = OUT / "models" / f"{slug(stl.stem)}.glb"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        mesh.export(dest)
+        print("model", stl.name, len(mesh.faces), "faces", dest.stat().st_size // 1024, "KB")
+
+    manifest["me"] = [both(Image.open(ROOT / "PFP.png"), "me", "portrait"),
                       both(Image.open(ROOT / "Banner.png"), "me", "banner")]
 
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))

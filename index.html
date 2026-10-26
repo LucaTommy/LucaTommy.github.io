@@ -30,15 +30,6 @@
     <a class="nav__cta" href="#contact">Say ciao ↗</a>
   </header>
 
-  <!-- Scroll progress, styled as a 3D print job -->
-  <div class="print" aria-hidden="true">
-    <span class="print__dot"></span>
-    <span class="print__label">PRINTING</span>
-    <span class="print__pct">000%</span>
-    <span class="print__layer">L 000/240</span>
-    <span class="print__bar"><i></i></span>
-  </div>
-
   <main id="top">
     <!-- HERO -->
     <section class="hero" data-grid>
@@ -123,11 +114,41 @@
       <div class="section__head">
         <span class="section__num mono">05</span>
         <h2 class="section__title" data-split>Layer by layer</h2>
+        <p class="section__lede">The test print every 3D printer owner knows. Spin it, slice through its 240 layers, or press print and watch it grow.</p>
       </div>
       <div class="hobby">
-        <figure class="hobby__img layer">
-          <img src="assets/hobby/bambu-lab.webp" alt="Bambu Lab 3D printer with multi-colour filament system" loading="lazy" width="1265" height="1024" />
-        </figure>
+        <!-- Interactive print bed: three.js loads only when you scroll near it -->
+        <div class="bed" data-printbed>
+          <div class="bed__view">
+            <canvas class="bed__canvas" aria-label="3D model on a print bed. Drag to rotate."></canvas>
+            <span class="bed__corner tl"></span><span class="bed__corner tr"></span><span class="bed__corner bl"></span><span class="bed__corner br"></span>
+            <div class="bed__hud bed__hud--top mono">
+              <span data-bed-name>Loading model…</span>
+              <span data-bed-size></span>
+            </div>
+            <div class="bed__hud bed__hud--bottom mono">
+              <span data-bed-z>Z 00.00 mm</span>
+              <span data-bed-layer>L 000/000</span>
+            </div>
+            <p class="bed__hint mono" data-bed-hint>Drag to rotate · drop an STL to print yours</p>
+            <img class="bed__fallback" src="assets/hobby/bambu-lab-sm.webp" alt="Bambu Lab 3D printer" loading="lazy" hidden />
+          </div>
+          <div class="bed__controls">
+            <button class="bed__play mono" data-bed-play>▶ Print</button>
+            <label class="bed__slider">
+              <span class="mono">Layer</span>
+              <input type="range" min="0" max="1000" value="1000" data-bed-slice aria-label="Slice height" />
+            </label>
+            <div class="bed__modes mono" role="group" aria-label="View mode">
+              <button aria-pressed="true" data-mode="solid">Solid</button>
+              <button aria-pressed="false" data-mode="wire">Edges</button>
+              <button aria-pressed="false" data-mode="xray">X-ray</button>
+            </div>
+            <button class="bed__touch mono" data-bed-touch aria-pressed="false">✋ Rotate</button>
+            <label class="bed__upload mono">＋ Your STL<input type="file" accept=".stl" data-bed-file hidden /></label>
+          </div>
+          <p class="bed__credit mono" data-bed-credit></p>
+        </div>
         <div class="hobby__cols">
           <div>
             <h3 class="mono">CAD → print</h3>
@@ -138,7 +159,8 @@
             <p>I use AI to go from idea to working thing fast: games, the tools above, small programs. I like to understand what it writes, so every project teaches me a bit more code.</p>
           </div>
           <div class="hobby__now mono">
-            <span>Currently:</span> learning to design for print — tolerances, overhangs, and why the first layer is everything.
+            <img src="assets/hobby/bambu-lab-sm.webp" alt="My Bambu Lab printer" loading="lazy" width="640" height="518" />
+            <p><span>Currently:</span> learning to design for print — tolerances, overhangs, and why the first layer is everything.</p>
           </div>
         </div>
       </div>
@@ -193,7 +215,14 @@
     </div>
   </dialog>
 
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/printbed.js"></script>
 </body>
 </html>

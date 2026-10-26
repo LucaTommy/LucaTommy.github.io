@@ -79,7 +79,7 @@
 
   function renderProducts() {
     $("[data-products]").innerHTML = PRODUCTS.map((p, i) => `
-      <article class="case" data-gallery="products:${i}" style="--ratio:${p.ratio || "4 / 3"}">
+      <article class="case${p.cutout ? " case--cutout" : ""}" data-gallery="products:${i}" style="--ratio:${p.ratio || "4 / 3"}">
         <button class="case__media layer" data-open="0" aria-label="Open ${esc(p.title)} gallery">
           <img src="${p.images[0].src}" alt="${esc(p.images[0].alt)}" loading="lazy" decoding="async" />
           <span class="open">${p.images.length} images ↗</span>
@@ -106,6 +106,12 @@
         <div class="sos__meta"><h3 class="sos__title">${esc(p.title)}</h3><span class="sos__place mono">${esc(p.place)}</span></div>
         <p class="sos__text">${esc(p.text)}</p>
         <ul class="chips">${p.tags.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+        ${p.extra ? `
+        <button class="extra" data-gallery="sosx:${i}" data-open="0" aria-label="Open ${esc(p.extra.title)}">
+          <img src="${p.extra.images[0].sm}" alt="" loading="lazy" decoding="async" />
+          <span><b class="mono">Also · ${esc(p.extra.title)}</b>${esc(p.extra.line)}</span>
+          <span class="mono">↗</span>
+        </button>` : ""}
       </article>`).join("");
   }
 
@@ -133,7 +139,7 @@
   }
 
   // One click handler for every gallery on the page
-  const GALLERIES = { products: PRODUCTS, sos: SOS, tools: TOOLS };
+  const GALLERIES = { products: PRODUCTS, sos: SOS, sosx: SOS.map((p) => p.extra), tools: TOOLS };
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-open]");
     if (!btn) return;
@@ -280,26 +286,17 @@
     }, 2000);
   }
 
-  /* ───────── Scroll: statement words + print progress ───────── */
+  /* ───────── Scroll: statement words ───────── */
   function scrollFx() {
     const st = $("[data-words-reveal]");
     const words = st.textContent.trim().split(/\s+/);
     st.innerHTML = words.map((w) => `<span class="w${/^(CAD|AI|printer|software)/.test(w) ? " hl" : ""}">${esc(w)}</span>`).join(" ");
     const ws = $$(".w", st);
 
-    const pct = $(".print__pct"), layer = $(".print__layer"), bar = $(".print__bar i"), print = $(".print");
     let ticking = false;
 
     function update() {
       ticking = false;
-      const max = document.documentElement.scrollHeight - innerHeight;
-      const p = max > 0 ? Math.min(1, scrollY / max) : 0;
-      pct.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%";
-      layer.textContent = `L ${String(Math.round(p * 240)).padStart(3, "0")}/240`;
-      bar.style.transform = `scaleX(${p})`;
-      print.classList.toggle("done", p > 0.995);
-      $(".print__label").textContent = p > 0.995 ? "PRINTED" : "PRINTING";
-
       const r = st.getBoundingClientRect();
       const sp = Math.min(1, Math.max(0, (innerHeight * 0.85 - r.top) / (r.height + innerHeight * 0.35)));
       const on = Math.round(sp * ws.length);
