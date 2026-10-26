@@ -1,9 +1,9 @@
 # Original source files stay on your computer; the site uses the optimized copies in assets/
-Works/
-Banner.png
-PFP.jpg
-PFP.png
-Models/
+/Works/
+/Banner.png
+/PFP.jpg
+/PFP.png
+/Models/
 *.NEF
 .DS_Store
 Thumbs.db
