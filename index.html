@@ -3,19 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Only this site's own files may load or run. The hash allows the inline importmap at the bottom;
+       if you edit that importmap, the hash must be updated (see README). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4WvtBMb/s94Dh3dtB87giUJejATr4xQ4tNJZPO5qdGg='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Luca Tomaselli — Design, CAD & code</title>
-  <meta name="description" content="Portfolio of Luca Tomaselli, design student at unibz. CAD, 3D printing, product, typography, and tools and games built with AI." />
+  <meta name="description" content="Luca Tomaselli — design student at unibz, Bolzano. CAD and 3D printing, product design, typography, and games and tools built with AI." />
+  <meta name="author" content="Luca Tomaselli" />
   <meta name="theme-color" content="#f2f1ec" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Luca Tomaselli" />
   <meta property="og:title" content="Luca Tomaselli — Design, CAD & code" />
   <meta property="og:description" content="CAD, 3D printing, product, typography, and tools built with AI." />
   <meta property="og:image" content="https://tommi.ink/assets/me/banner.webp" />
   <meta property="og:url" content="https://tommi.ink/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://tommi.ink/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="vendor/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Tells search engines who this page is about -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "url": "https://tommi.ink/",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Luca Tomaselli",
+        "url": "https://tommi.ink/",
+        "image": "https://tommi.ink/assets/me/portrait.webp",
+        "jobTitle": "Design student",
+        "affiliation": { "@type": "CollegeOrUniversity", "name": "Free University of Bozen-Bolzano", "url": "https://www.unibz.it/" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Bolzano", "addressCountry": "IT" },
+        "knowsAbout": ["CAD", "3D printing", "Product design", "Typography", "Game development", "Artificial intelligence"],
+        "sameAs": ["https://github.com/LucaTommy", "https://www.linkedin.com/in/luca-tomaselli-1206043a8/"]
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip" href="#cad">Skip to work</a>
@@ -190,7 +215,7 @@
     <!-- CONTACT -->
     <section class="contact" id="contact">
       <p class="mono">Got an idea, a project, or a file to print?</p>
-      <a class="contact__big" data-stretch-link href="https://github.com/LucaTommy" target="_blank" rel="noopener">
+      <a class="contact__big" href="https://github.com/LucaTommy" target="_blank" rel="noopener">
         <span data-stretch>SAY CIAO</span> <span class="arrow">↗</span>
       </a>
       <div class="contact__links mono" data-links></div>
@@ -217,12 +242,7 @@
     </div>
   </dialog>
 
-  <script type="importmap">
-    { "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    } }
-  </script>
+  <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }</script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
   <script type="module" src="js/printbed.js"></script>

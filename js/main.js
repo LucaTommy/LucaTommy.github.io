@@ -129,13 +129,14 @@
 
   function renderLinks() {
     const links = [["GitHub", SITE.github]];
-    if (SITE.email) links.unshift(["Write me", `mailto:${SITE.email}`]);
+    const email = [].concat(SITE.email || []).join("@");
+    if (email) links.unshift(["Write me", `mailto:${email}`]);
     if (SITE.instagram) links.push(["Instagram", SITE.instagram]);
     if (SITE.linkedin) links.push(["LinkedIn", SITE.linkedin]);
     $("[data-links]").innerHTML = links
       .map(([l, h]) => `<a href="${esc(h)}" ${h.startsWith("http") ? 'target="_blank" rel="noopener"' : ""}>${l} ↗</a>`)
       .join("");
-    $(".contact__big").href = SITE.email ? `mailto:${SITE.email}` : SITE.github;
+    $(".contact__big").href = email ? `mailto:${email}` : SITE.github;
   }
 
   // One click handler for every gallery on the page

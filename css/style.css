@@ -1,3 +1,24 @@
+/* ───────── Fonts (self-hosted, licences in vendor/fonts) ───────── */
+@font-face {
+  font-family: "Archivo";
+  src: url("../vendor/fonts/archivo-variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../vendor/fonts/jetbrains-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../vendor/fonts/jetbrains-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
 /* ───────── Tokens ───────── */
 :root {
   --paper: #f2f1ec;

@@ -21,3 +21,11 @@ Put the `.stl` in `Models/`, run `python tools/build_assets.py`, then add it to 
 ## Preview locally
 
 `python -m http.server 8000` then open http://localhost:8000
+
+## Security notes
+
+- Everything is self-hosted (`vendor/` holds three.js and the fonts), so the site loads nothing from other servers.
+- `index.html` has a Content-Security-Policy that only allows the site's own files. The inline `importmap` is allowed by its SHA-256 hash: if you ever edit it, recompute the hash with
+  `node -e "const s=require('fs').readFileSync('index.html','utf8');console.log('sha256-'+require('crypto').createHash('sha256').update(s.match(/<script type=\"importmap\">([\s\S]*?)<\/script>/)[1]).digest('base64'))"`
+  and replace the `sha256-…` value in the CSP line.
+- Want to load something from another site (an embed, analytics)? Its domain has to be added to the CSP first.

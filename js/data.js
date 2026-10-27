@@ -3,7 +3,8 @@
 const SITE = {
   name: "Luca Tomaselli",
   github: "https://github.com/LucaTommy",
-  email: "lucatomaselli06@gmail.com",
+  // split so simple spam bots scanning the source don't find the address; joined in main.js
+  email: ["lucatomaselli06", "gmail.com"],
   instagram: "", // optional
   linkedin: "https://www.linkedin.com/in/luca-tomaselli-1206043a8/",
 };

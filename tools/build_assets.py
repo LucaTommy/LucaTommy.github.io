@@ -4,7 +4,6 @@ Run:  python tools/build_assets.py
 Needs: pip install pymupdf rawpy pillow trimesh fast-simplification
 """
 import io
-import json
 import re
 from pathlib import Path
 
@@ -35,13 +34,12 @@ def save(img, dest, width):
         img = img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
     dest.parent.mkdir(parents=True, exist_ok=True)
     img.save(dest, "WEBP", quality=80, method=6)
-    return img.size
 
 
 def both(img, folder, name):
-    w, h = save(img, OUT / folder / f"{name}.webp", FULL_W)
+    """Write name.webp (large, for the viewer) and name-sm.webp (grid)."""
+    save(img, OUT / folder / f"{name}.webp", FULL_W)
     save(img, OUT / folder / f"{name}-sm.webp", THUMB_W)
-    return {"src": f"assets/{folder}/{name}.webp", "sm": f"assets/{folder}/{name}-sm.webp", "w": w, "h": h}
 
 
 def open_any(path):
@@ -61,30 +59,20 @@ def open_any(path):
 
 
 def pdf_pages(pdf, folder):
-    """Render every page; label each with the exercise title found on it (e.g. '03. Pen')."""
+    """Render every page as p01, p02, ..."""
     doc = pymupdf.open(pdf)
-    pages = []
     for i, page in enumerate(doc):
         pix = page.get_pixmap(dpi=110)
-        img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-        entry = both(img, folder, f"p{i + 1:02d}")
-        text = page.get_text()
-        found = re.findall(r"(\d\d\. [A-Z][A-Za-z ]+|Final[ -]+[A-Za-z ]+)", text)
-        entry["label"] = found[-1].strip() if found else ""
-        pages.append(entry)
-    return pages
+        both(Image.frombytes("RGB", (pix.width, pix.height), pix.samples), folder, f"p{i + 1:02d}")
+    print("pdf", pdf.name, len(doc))
 
 
 def main():
-    manifest = {}
-
     # CAD books: one folder per PDF
     for pdf in sorted((WORKS / "Cad").glob("*.pdf")):
-        key = slug(pdf.stem)
-        manifest[key] = pdf_pages(pdf, f"cad/{key}")
-        print("pdf", pdf.name, len(manifest[key]))
+        pdf_pages(pdf, f"cad/{slug(pdf.stem)}")
 
-    manifest["film-invite"] = pdf_pages(WORKS / "Typography" / "Film Invite.pdf", "typo/film-invite")
+    pdf_pages(WORKS / "Typography" / "Film Invite.pdf", "typo/film-invite")
 
     # Plain image folders
     for folder in [
@@ -97,12 +85,8 @@ def main():
     ]:
         files = sorted(p for p in (WORKS / folder).iterdir()
                        if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".nef"})
-        key = slug(folder.split("/")[-1])
-        manifest[key] = []
         for f in files:
-            entry = both(open_any(f), slug(folder), slug(f.stem))
-            entry["name"] = f.stem
-            manifest[key].append(entry)
+            both(open_any(f), slug(folder), slug(f.stem))
         print("img", folder, len(files))
 
     # 3D models for the print bed: STL in, light GLB out (centred on the bed, sitting on Z=0)
@@ -117,10 +101,8 @@ def main():
         mesh.export(dest)
         print("model", stl.name, len(mesh.faces), "faces", dest.stat().st_size // 1024, "KB")
 
-    manifest["me"] = [both(Image.open(ROOT / "PFP.png"), "me", "portrait"),
-                      both(Image.open(ROOT / "Banner.png"), "me", "banner")]
-
-    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))
+    both(Image.open(ROOT / "PFP.png"), "me", "portrait")
+    both(Image.open(ROOT / "Banner.png"), "me", "banner")
 
 
 if __name__ == "__main__":
