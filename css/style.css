@@ -78,6 +78,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .nav__links a:hover::after, .nav__cta:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav__cta { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
+.nav__right { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); }
+.nav__perf { padding: 5px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 11px; transition: background 0.2s, color 0.2s; }
+.nav__perf b { font-weight: 500; }
+.nav__perf:hover { background: #fff; color: #000; }
 @media (max-width: 640px) { .nav__links { display: none; } }
 
 /* ───────── Hero ───────── */
@@ -324,8 +328,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .bed__hint { position: absolute; left: 0; right: 0; bottom: 38px; margin: 0; text-align: center; font-size: 10px; opacity: 0.7; pointer-events: none; transition: opacity 0.5s; }
 .bed__hint.gone { opacity: 0; }
 .bed__fallback { position: absolute; inset: 10%; width: 80%; height: 80%; object-fit: contain; }
+.bed__load {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; gap: 4px; padding: 14px 22px; border-radius: 999px; background: #fff; color: var(--accent); font-size: 13px;
+}
+.bed__load small { font-size: 10px; opacity: 0.7; }
+.bed__load:hover { background: var(--ink); color: #fff; }
 
 .bed__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.bed:not(.ready) .bed__controls { opacity: 0.4; pointer-events: none; } /* until a model is on the bed */
 .bed__controls button, .bed__upload {
   padding: 9px 14px; border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 999px; cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -409,3 +420,11 @@ body.locked { overflow: hidden; }
   .statement__text .w { opacity: 1; }
   html { scroll-behavior: auto; }
 }
+
+/* ───────── Lite performance mode (toggle in the nav) ───────── */
+html.lite { scroll-behavior: auto; }
+.lite *, .lite *::before, .lite *::after { animation: none !important; transition: none !important; }
+.lite .layer, .lite .hero__line .ch { clip-path: none; }
+.lite [data-split] .ch, .lite .rise { transform: none; opacity: 1; }
+.lite .statement__text .w { opacity: 1; }
+.lite .hero::before, .lite .hero::after { display: none; }

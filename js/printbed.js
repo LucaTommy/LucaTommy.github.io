@@ -5,15 +5,36 @@ const root = document.querySelector("[data-printbed]");
 const $ = (s) => root.querySelector(s);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = matchMedia("(pointer: fine)").matches;
+const PERF = window.PERF || { lite: false }; // set by main.js
+
+let started = false, near = false;
+let applyQuality = () => {}; // replaced once the scene exists
+
+function boot() {
+  if (started) return;
+  started = true;
+  $("[data-bed-load]").hidden = true;
+  start().catch(fail);
+}
 
 if (root) {
+  const load = $("[data-bed-load]");
+  load.addEventListener("click", boot);
+  // In lite mode nothing is downloaded until the visitor asks for it
   const io = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) {
-      io.disconnect();
-      start().catch(fail);
-    }
+    if (!e.isIntersecting) return;
+    io.disconnect();
+    near = true;
+    if (!PERF.lite) return boot();
+    load.hidden = false;
+    $("[data-bed-name]").textContent = "3D paused · Lite mode";
   }, { rootMargin: "600px 0px" });
   io.observe(root);
+
+  document.addEventListener("perfchange", () => {
+    if (!started && near && !PERF.lite) boot();
+    applyQuality();
+  });
 }
 
 function fail(err) {
@@ -40,7 +61,6 @@ async function start() {
 
   /* ── Renderer, scene, camera (Z is up, like a slicer) ── */
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.localClippingEnabled = true;
 
   const scene = new THREE.Scene();
@@ -105,7 +125,7 @@ async function start() {
     ui.hint.classList.add("gone");
   });
   controls.addEventListener("end", () => {
-    idle = setTimeout(() => (controls.autoRotate = !reduced), 4000);
+    idle = setTimeout(() => (controls.autoRotate = !reduced && !PERF.lite), 4000);
   });
 
   /* ── State ── */
@@ -156,9 +176,10 @@ async function start() {
     ui.credit.textContent = meta.credit || "";
 
     setMode(mode);
-    v = 0;
-    playing = !reduced; // print it once when it appears
-    if (reduced) v = 1;
+    root.classList.add("ready");
+    // print it once when it appears (full mode only)
+    playing = !reduced && !PERF.lite;
+    v = playing ? 0 : 1;
     apply();
   }
 
@@ -213,12 +234,22 @@ async function start() {
     renderer.setAnimationLoop(e.isIntersecting ? tick : null);
   }).observe(view);
 
-  new ResizeObserver(() => {
+  function resize() {
     const { clientWidth: w, clientHeight: h } = view;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-  }).observe(view);
+  }
+  new ResizeObserver(resize).observe(view);
+
+  // Lite: 1x resolution, no auto-spin, no running print
+  applyQuality = () => {
+    renderer.setPixelRatio(PERF.lite ? 1 : Math.min(devicePixelRatio, 2));
+    controls.autoRotate = !reduced && !PERF.lite;
+    if (PERF.lite) playing = false;
+    resize();
+  };
+  applyQuality();
 
   /* ── Controls ── */
   ui.play.addEventListener("click", () => {

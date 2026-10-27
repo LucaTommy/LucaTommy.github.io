@@ -5,6 +5,28 @@
   const finePointer = matchMedia("(pointer: fine)").matches;
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
+  /* ───────── Performance mode ─────────
+     "lite" switches off motion and keeps the 3D bed unloaded until asked (see printbed.js).
+     Defaults to lite for reduced-motion, data-saver or low-memory devices; the visitor's choice is remembered. */
+  const PERF = (window.PERF = { lite: false });
+  {
+    let saved = null;
+    try { saved = localStorage.getItem("perf"); } catch {}
+    const weak = navigator.connection?.saveData || (navigator.deviceMemory && navigator.deviceMemory <= 2);
+    PERF.lite = saved ? saved === "lite" : reduced || !!weak;
+  }
+  const perfBtn = $("[data-perf]");
+  function setPerf(lite, save) {
+    PERF.lite = lite;
+    document.documentElement.classList.toggle("lite", lite);
+    perfBtn.setAttribute("aria-pressed", lite);
+    perfBtn.querySelector("b").textContent = lite ? "Lite" : "Full";
+    if (save) try { localStorage.setItem("perf", lite ? "lite" : "full"); } catch {}
+    document.dispatchEvent(new CustomEvent("perfchange"));
+  }
+  setPerf(PERF.lite, false);
+  perfBtn.addEventListener("click", () => setPerf(!PERF.lite, true));
+
   /* ───────── Text splitting ───────── */
   function splitChars(el) {
     const text = el.textContent;
@@ -212,8 +234,6 @@
     lines.forEach((l, row) => splitChars(l).forEach((c) => (c.style.setProperty("--row", row), chars.push(c))));
     const contactChars = splitChars($(".contact [data-stretch]"));
 
-    if (reduced) return;
-
     // Cache centres at rest so width changes don't feed back into distances
     let centres = [];
     const measure = () => (centres = chars.map((c) => { const r = c.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2 + scrollY]; }));
@@ -253,7 +273,12 @@
       });
       if (moving && visible) kick();
     }
-    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    const kick = () => { if (!raf && !PERF.lite) raf = requestAnimationFrame(frame); };
+    document.addEventListener("perfchange", () => {
+      if (!PERF.lite) return kick();
+      state.forEach((s) => (s.w = s.t = 100)); // lite: letters back to rest
+      chars.forEach((c) => c.style.setProperty("--w", 100));
+    });
 
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(heroEl);
     // wait for the print-in animation and fonts before measuring
@@ -264,7 +289,7 @@
 
     // Contact: letters widen in a ripple on hover
     const big = $(".contact__big");
-    big.addEventListener("pointerenter", () => contactChars.forEach((c, i) => setTimeout(() => c.style.setProperty("--w", 125), i * 35)));
+    big.addEventListener("pointerenter", () => !PERF.lite && contactChars.forEach((c, i) => setTimeout(() => c.style.setProperty("--w", 125), i * 35)));
     big.addEventListener("pointerleave", () => contactChars.forEach((c, i) => setTimeout(() => c.style.setProperty("--w", 100), i * 35)));
     contactChars.forEach((c) => (c.style.transition = "font-variation-settings .4s cubic-bezier(.2,.8,.2,1)"));
   }
@@ -274,8 +299,8 @@
     const el = $(".swap");
     const words = el.dataset.words.split(",");
     let i = 0;
-    if (reduced) return;
     setInterval(() => {
+      if (PERF.lite) return;
       el.classList.add("out");
       setTimeout(() => {
         i = (i + 1) % words.length;

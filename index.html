@@ -54,7 +54,10 @@
       <a href="#tools">Tools</a>
       <a href="#about">About</a>
     </nav>
-    <a class="nav__cta" href="#contact">Say ciao ↗</a>
+    <div class="nav__right">
+      <button class="nav__perf mono" data-perf aria-pressed="false" title="Lite turns off animations and the 3D model, for slower devices">Perf: <b>Full</b></button>
+      <a class="nav__cta" href="#contact">Say ciao ↗</a>
+    </div>
   </header>
 
   <main id="top">
@@ -159,6 +162,7 @@
             </div>
             <p class="bed__hint mono" data-bed-hint>Drag to rotate · drop an STL to print yours</p>
             <img class="bed__fallback" src="assets/hobby/bambu-lab-sm.webp" alt="Bambu Lab 3D printer" loading="lazy" hidden />
+            <button class="bed__load mono" data-bed-load hidden>▶ Load 3D model <small>Lite mode · about 1.2 MB</small></button>
           </div>
           <div class="bed__controls">
             <button class="bed__play mono" data-bed-play>▶ Print</button>
