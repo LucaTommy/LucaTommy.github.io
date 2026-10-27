@@ -21,7 +21,7 @@
   <link rel="canonical" href="https://tommi.ink/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preload" href="vendor/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
   <!-- Tells search engines who this page is about -->
   <script type="application/ld+json">
     {
@@ -45,18 +45,52 @@
 <body>
   <a class="skip" href="#cad">Skip to work</a>
 
+  <!-- Icons, reused with <svg><use href="#i-…"/></svg> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15v4h16v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-4.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.7-2.3L4 14.5a1.6 1.6 0 0 1 2.4-2.1L8 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M12 3l-3 3m3-3 3 3m-3 15-3-3m3 3 3-3M3 12l3-3m-3 3 3 3m15-3-3-3m3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M4 20h7v-7H4zM13 4h7v7M20 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8 8h12v12H8zM16 8V4H4v12h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12m0 0-4-4m4 4 4-4M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-magnet" viewBox="0 0 24 24"><path d="M6 4v8a6 6 0 0 0 12 0V4h-4v8a2 2 0 0 1-4 0V4zM6 8h4m4 0h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wire" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9zM12 12 4 7.5M12 12l8-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-full" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M4 4h16M6 4v3m12-3v3M9 7h6v4l-1.5 2h-3L9 11zM12 13v3M5 20h14M8 17h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clear" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="s-cube" viewBox="0 0 24 24"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9zM4 7.5 12 12l8-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="s-sphere" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="12" rx="8.5" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
+    <symbol id="s-cylinder" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="s-cone" viewBox="0 0 24 24"><path d="M12 3 5 18.5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="s-torus" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="11.5" rx="3.5" ry="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="s-capsule" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  </svg>
+
   <header class="nav">
     <a class="nav__logo" href="#top" aria-label="Back to top">LT<span>.</span></a>
     <nav class="nav__links">
       <a href="#cad">CAD</a>
-      <a href="#product">Product</a>
+      <a href="#product" data-i18n="nav.product">Product</a>
       <a href="#sos">SOS</a>
-      <a href="#tools">Tools</a>
-      <a href="#about">About</a>
+      <a href="#tools" data-i18n="nav.tools">Tools</a>
+      <a href="#hobby">3D</a>
+      <a href="#about" data-i18n="nav.about">About</a>
     </nav>
     <div class="nav__right">
-      <button class="nav__perf mono" data-perf aria-pressed="false" title="Lite turns off animations and the 3D model, for slower devices">Perf: <b>Full</b></button>
-      <a class="nav__cta" href="#contact">Say ciao ↗</a>
+      <div class="lang mono" role="group" aria-label="Language" data-i18n-aria="lang.label">
+        <button data-lang="en" lang="en">EN</button><button data-lang="it" lang="it">IT</button><button data-lang="de" lang="de">DE</button>
+      </div>
+      <button class="nav__perf mono" data-perf aria-pressed="false" data-i18n-title="perf.title"><span class="nav__perfLabel">Perf: </span><b>Full</b></button>
+      <a class="nav__cta" href="#contact" data-i18n="nav.cta">Say ciao ↗</a>
     </div>
   </header>
 
@@ -64,7 +98,7 @@
     <!-- HERO -->
     <section class="hero" data-grid>
       <div class="hero__meta mono">
-        <span>Design student — unibz, Bolzano</span>
+        <span data-i18n="hero.meta">Design student — unibz, Bolzano</span>
         <span class="hero__xy">X <b data-x>000.0</b> Y <b data-y>000.0</b></span>
         <span>Portfolio ’26</span>
       </div>
@@ -75,21 +109,15 @@
       </h1>
 
       <div class="hero__foot">
-        <p class="hero__tag">
-          I <span class="swap" data-words="model,print,design,code,prototype">model</span><br />things.
-        </p>
-        <p class="hero__intro">
-          CAD & 3D printing on one side, AI-built games and tools on the other. Products, type and a lot of prototypes in between.
-        </p>
-        <a class="hero__scroll mono" href="#statement">Scroll ↓</a>
+        <p class="hero__tag" data-hero-tag>I <span class="swap">model</span><br />things.</p>
+        <p class="hero__intro" data-i18n="hero.intro">CAD & 3D printing on one side, AI-built games and tools on the other. Products, type and a lot of prototypes in between.</p>
+        <a class="hero__scroll mono" href="#statement" data-i18n="hero.scroll">Scroll ↓</a>
       </div>
     </section>
 
     <!-- STATEMENT -->
     <section class="statement" id="statement">
-      <p class="statement__text" data-words-reveal>
-        I study design at the Free University of Bozen-Bolzano. Two things keep me up at night: modelling objects in CAD and watching them come off the printer, and building software with AI — games, tools, small programs that fix my own problems.
-      </p>
+      <p class="statement__text" data-words-reveal>I study design at the Free University of Bozen-Bolzano. Two things keep me up at night: modelling objects in CAD and watching them come off the printer, and building software with AI — games, tools, small programs that fix my own problems.</p>
     </section>
 
     <!-- CAD -->
@@ -98,11 +126,12 @@
         <span class="section__num mono">01</span>
         <h2 class="section__title" data-split>CAD Lab</h2>
         <p class="section__lede">
-          Drawing 3D CAD, WUP 2025/26. Fifteen objects across two semesters — modelled, rendered and staged as ad campaigns. <span class="mono hint">Hover a poster to see the model.</span>
+          <span data-i18n="cad.lede">Drawing 3D CAD, WUP 2025/26. Fifteen objects across two semesters — modelled, rendered and staged as ad campaigns.</span>
+          <span class="mono hint" data-i18n="cad.hint">Hover a poster to see the model.</span>
         </p>
       </div>
-      <div class="tabs mono" role="tablist" aria-label="Filter by semester">
-        <button role="tab" aria-selected="true" data-term="all">All <sup>15</sup></button>
+      <div class="tabs mono" role="tablist" aria-label="Filter by semester" data-i18n-aria="cad.filter">
+        <button role="tab" aria-selected="true" data-term="all"><span data-i18n="cad.all">All</span> <sup>15</sup></button>
         <button role="tab" aria-selected="false" data-term="ws">WS 25/26 <sup>7</sup></button>
         <button role="tab" aria-selected="false" data-term="ss">SS 26 <sup>8</sup></button>
       </div>
@@ -113,8 +142,8 @@
     <section class="section section--dark" id="product">
       <div class="section__head">
         <span class="section__num mono">02</span>
-        <h2 class="section__title" data-split>Made by hand</h2>
-        <p class="section__lede">Product and typography projects from university — things you can hold.</p>
+        <h2 class="section__title" data-split data-i18n="product.title">Made by hand</h2>
+        <p class="section__lede" data-i18n="product.lede">Product and typography projects from university — things you can hold.</p>
       </div>
       <div class="cases" data-products></div>
     </section>
@@ -124,7 +153,7 @@
       <div class="section__head">
         <span class="section__num mono">03</span>
         <h2 class="section__title" data-split>Scuola Open Source</h2>
-        <p class="section__lede">Summer programmes in small Italian towns. I build the digital bit: a game for one village, a poster tool for another.</p>
+        <p class="section__lede" data-i18n="sos.lede">Summer programmes in small Italian towns. I build the digital bit: a game for one village, a poster tool for another.</p>
       </div>
       <div class="sos" data-sos></div>
     </section>
@@ -133,18 +162,18 @@
     <section class="section" id="tools">
       <div class="section__head">
         <span class="section__num mono">04</span>
-        <h2 class="section__title" data-split>Tools I needed</h2>
-        <p class="section__lede">When I need something, I build it — with AI as the pair programmer. Everything runs in the browser.</p>
+        <h2 class="section__title" data-split data-i18n="tools.title">Tools I needed</h2>
+        <p class="section__lede" data-i18n="tools.lede">When I need something, I build it — with AI as the pair programmer. Everything runs in the browser.</p>
       </div>
       <div class="tools" data-tools></div>
     </section>
 
-    <!-- HOBBY -->
+    <!-- PRINT BED -->
     <section class="section section--accent" id="hobby">
       <div class="section__head">
         <span class="section__num mono">05</span>
-        <h2 class="section__title" data-split>Layer by layer</h2>
-        <p class="section__lede">The test print every 3D printer owner knows. Spin it, slice through its 240 layers, or press print and watch it grow.</p>
+        <h2 class="section__title" data-split data-i18n="bed.title">Layer by layer</h2>
+        <p class="section__lede" data-i18n="bed.lede">The test print every 3D printer owner knows. Spin it, scrub through its layers, change the filament — or press print and watch it grow.</p>
       </div>
       <div class="hobby">
         <!-- Interactive print bed: three.js loads only when you scroll near it -->
@@ -153,46 +182,127 @@
             <canvas class="bed__canvas" aria-label="3D model on a print bed. Drag to rotate."></canvas>
             <span class="bed__corner tl"></span><span class="bed__corner tr"></span><span class="bed__corner bl"></span><span class="bed__corner br"></span>
             <div class="bed__hud bed__hud--top mono">
-              <span data-bed-name>Loading model…</span>
+              <span data-bed-name data-i18n="bed.loading">Loading model…</span>
               <span data-bed-size></span>
             </div>
             <div class="bed__hud bed__hud--bottom mono">
               <span data-bed-z>Z 00.00 mm</span>
-              <span data-bed-layer>L 000/000</span>
+              <span data-bed-stats></span>
             </div>
-            <p class="bed__hint mono" data-bed-hint>Drag to rotate · drop an STL to print yours</p>
+            <!-- vertical layer slider, like in a slicer -->
+            <div class="vslider" data-bed-slice role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="240" aria-valuenow="240" aria-label="Layer" data-i18n-aria="bed.layer">
+              <div class="vslider__track"><div class="vslider__fill"></div></div>
+              <div class="vslider__thumb"><span class="vslider__tag mono" data-bed-layer>240</span></div>
+            </div>
+            <div class="bed__progress" aria-hidden="true"><i></i></div>
+            <p class="bed__hint mono" data-bed-hint data-i18n="bed.hint">Drag to rotate · drop an STL to print yours</p>
             <img class="bed__fallback" src="assets/hobby/bambu-lab-sm.webp" alt="Bambu Lab 3D printer" loading="lazy" hidden />
-            <button class="bed__load mono" data-bed-load hidden>▶ Load 3D model <small>Lite mode · about 1.2 MB</small></button>
+            <button class="bigbtn mono" data-bed-load hidden><span data-i18n="bed.load">▶ Load 3D model</span><small data-i18n="bed.loadSmall">Lite mode · about 1.2 MB</small></button>
           </div>
-          <div class="bed__controls">
-            <button class="bed__play mono" data-bed-play>▶ Print</button>
-            <label class="bed__slider">
-              <span class="mono">Layer</span>
-              <input type="range" min="0" max="1000" value="1000" data-bed-slice aria-label="Slice height" />
-            </label>
-            <div class="bed__modes mono" role="group" aria-label="View mode">
-              <button aria-pressed="true" data-mode="solid">Solid</button>
-              <button aria-pressed="false" data-mode="wire">Edges</button>
-              <button aria-pressed="false" data-mode="xray">X-ray</button>
+          <div class="panel">
+            <div class="panel__group">
+              <button class="ibtn ibtn--primary" data-bed-play><svg><use href="#i-play" /></svg><span data-bed-play-label>Print</span></button>
+              <button class="ibtn ibtn--icon" data-bed-restart aria-label="Restart" data-i18n-aria="bed.restart"><svg><use href="#i-restart" /></svg></button>
             </div>
-            <button class="bed__touch mono" data-bed-touch aria-pressed="false">✋ Rotate</button>
-            <label class="bed__upload mono">＋ Your STL<input type="file" accept=".stl" data-bed-file hidden /></label>
+            <div class="seg mono" role="group" aria-label="View" data-i18n-aria="bed.view">
+              <span class="seg__pill" aria-hidden="true"></span>
+              <button aria-pressed="true" data-mode="solid" data-i18n="bed.solid">Solid</button>
+              <button aria-pressed="false" data-mode="wire" data-i18n="bed.edges">Edges</button>
+              <button aria-pressed="false" data-mode="xray" data-i18n="bed.xray">X-ray</button>
+            </div>
+            <div class="swatches" role="radiogroup" aria-label="Filament" data-i18n-aria="bed.filament" data-bed-colors></div>
+            <div class="panel__group panel__group--end">
+              <button class="ibtn bed__touch" data-bed-touch aria-pressed="false"><svg><use href="#i-hand" /></svg><span data-i18n="bed.rotate">Rotate</span></button>
+              <label class="ibtn"><svg><use href="#i-upload" /></svg><span data-i18n="bed.upload">Your STL</span><input type="file" accept=".stl" data-bed-file hidden /></label>
+            </div>
           </div>
           <p class="bed__credit mono" data-bed-credit></p>
         </div>
         <div class="hobby__cols">
           <div>
-            <h3 class="mono">CAD → print</h3>
-            <p>Most evenings the printer is running. For now I mostly print other people's files — the next step is printing my own: parts modelled from scratch, tested, fixed, printed again.</p>
+            <h3 class="mono" data-i18n="hobby.h1">CAD → print</h3>
+            <p data-i18n="hobby.p1">Most evenings the printer is running. For now I mostly print other people's files — the next step is printing my own: parts modelled from scratch, tested, fixed, printed again.</p>
           </div>
           <div>
-            <h3 class="mono">AI → software</h3>
-            <p>I use AI to go from idea to working thing fast: games, the tools above, small programs. I like to understand what it writes, so every project teaches me a bit more code.</p>
+            <h3 class="mono" data-i18n="hobby.h2">AI → software</h3>
+            <p data-i18n="hobby.p2">I use AI to go from idea to working thing fast: games, the tools above, small programs. I like to understand what it writes, so every project teaches me a bit more code.</p>
           </div>
           <div class="hobby__now mono">
             <img src="assets/hobby/bambu-lab-sm.webp" alt="My Bambu Lab printer" loading="lazy" width="640" height="518" />
-            <p><span>Currently:</span> learning to design for print — tolerances, overhangs, and why the first layer is everything.</p>
+            <p data-i18n-html="hobby.now"><span>Currently:</span> learning to design for print — tolerances, overhangs, and why the first layer is everything.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKBENCH: a tiny Blender -->
+    <section class="section section--dark" id="workbench">
+      <div class="section__head">
+        <span class="section__num mono">06</span>
+        <h2 class="section__title" data-split data-i18n="wb.title">Workbench</h2>
+        <p class="section__lede" data-i18n="wb.lede">A tiny Blender in the browser. Add shapes, move, rotate and scale them — then send your model to the printer above.</p>
+      </div>
+      <div class="wb" data-workbench>
+        <div class="wb__view">
+          <canvas class="wb__canvas" aria-label="3D modelling workspace"></canvas>
+
+          <div class="wb__top">
+            <div class="wb__addwrap">
+              <button class="wbtn wbtn--accent" data-wb-addtoggle aria-expanded="false"><svg><use href="#i-plus" /></svg><span data-i18n="wb.add">Add</span></button>
+              <div class="wb__addmenu" data-wb-addmenu hidden>
+                <button data-wb-add="cube"><svg><use href="#s-cube" /></svg><span data-i18n="wb.cube">Cube</span></button>
+                <button data-wb-add="sphere"><svg><use href="#s-sphere" /></svg><span data-i18n="wb.sphere">Sphere</span></button>
+                <button data-wb-add="cylinder"><svg><use href="#s-cylinder" /></svg><span data-i18n="wb.cylinder">Cylinder</span></button>
+                <button data-wb-add="cone"><svg><use href="#s-cone" /></svg><span data-i18n="wb.cone">Cone</span></button>
+                <button data-wb-add="torus"><svg><use href="#s-torus" /></svg><span data-i18n="wb.torus">Torus</span></button>
+                <button data-wb-add="capsule"><svg><use href="#s-capsule" /></svg><span data-i18n="wb.capsule">Capsule</span></button>
+              </div>
+            </div>
+            <div class="seg seg--dark mono" role="group" aria-label="Transform">
+              <span class="seg__pill" aria-hidden="true"></span>
+              <button data-wb-mode="translate" aria-pressed="true" title="G"><svg><use href="#i-move" /></svg><span data-i18n="wb.move">Move</span></button>
+              <button data-wb-mode="rotate" aria-pressed="false" title="R"><svg><use href="#i-rotate" /></svg><span data-i18n="wb.rotate">Rotate</span></button>
+              <button data-wb-mode="scale" aria-pressed="false" title="S"><svg><use href="#i-scale" /></svg><span data-i18n="wb.scale">Scale</span></button>
+            </div>
+            <span class="wb__count mono" data-wb-count></span>
+            <button class="wbtn wbtn--icon" data-wb-full aria-label="Fullscreen" data-i18n-aria="wb.full"><svg><use href="#i-full" /></svg><span class="wb__doneLabel" data-i18n="wb.done">Done</span></button>
+          </div>
+
+          <aside class="wb__props" data-wb-props>
+            <p class="wb__sel mono" data-wb-sel data-i18n="wb.none">Tap a shape to select it</p>
+            <div class="wb__edit" data-wb-edit hidden>
+              <span class="wb__label mono" data-i18n="wb.size">Size (mm)</span>
+              <div class="wb__sizes mono">
+                <label><b class="ax-x">X</b><input type="number" min="1" max="250" step="1" data-wb-size="x" /></label>
+                <label><b class="ax-y">Y</b><input type="number" min="1" max="250" step="1" data-wb-size="y" /></label>
+                <label><b class="ax-z">Z</b><input type="number" min="1" max="250" step="1" data-wb-size="z" /></label>
+              </div>
+              <span class="wb__label mono" data-i18n="wb.colour">Colour</span>
+              <div class="swatches swatches--small" data-wb-colors></div>
+              <div class="wb__actions">
+                <button class="wbtn" data-wb-act="dup"><svg><use href="#i-copy" /></svg><span data-i18n="wb.dup">Duplicate</span></button>
+                <button class="wbtn" data-wb-act="drop"><svg><use href="#i-down" /></svg><span data-i18n="wb.drop">Drop to bed</span></button>
+                <button class="wbtn wbtn--danger" data-wb-act="del"><svg><use href="#i-trash" /></svg><span data-i18n="wb.del">Delete</span></button>
+              </div>
+            </div>
+          </aside>
+
+          <div class="wb__bottom">
+            <button class="wbtn wbtn--icon" data-wb-act="undo" aria-label="Undo" data-i18n-aria="wb.undo"><svg><use href="#i-undo" /></svg></button>
+            <button class="wbtn wbtn--icon" data-wb-act="redo" aria-label="Redo" data-i18n-aria="wb.redo"><svg><use href="#i-redo" /></svg></button>
+            <span class="wb__sep"></span>
+            <button class="wbtn" data-wb-toggle="snap" aria-pressed="true"><svg><use href="#i-magnet" /></svg><span data-i18n="wb.snap">Snap</span></button>
+            <button class="wbtn" data-wb-toggle="wire" aria-pressed="false"><svg><use href="#i-wire" /></svg><span data-i18n="wb.wire">Wire</span></button>
+            <button class="wbtn" data-wb-act="clear"><svg><use href="#i-clear" /></svg><span data-i18n="wb.clear">Clear</span></button>
+            <span class="wb__grow"></span>
+            <button class="wbtn" data-wb-act="export"><svg><use href="#i-download" /></svg><span data-i18n="wb.export">Export STL</span></button>
+            <button class="wbtn wbtn--accent" data-wb-act="send"><svg><use href="#i-print" /></svg><span data-i18n="wb.send">Send to printer</span></button>
+          </div>
+
+          <p class="wb__keys mono" data-i18n="wb.keys">G move · R rotate · S scale · X delete · Shift+D duplicate · Ctrl+Z undo</p>
+          <div class="wb__toast mono" data-wb-toast role="status"></div>
+          <button class="bigbtn bigbtn--dark mono" data-wb-open hidden><span data-i18n="wb.open">▶ Open Workbench</span><small data-i18n="wb.openSmall">Loads the 3D editor</small></button>
+          <button class="wb__tap mono" data-wb-tap hidden><svg><use href="#i-full" /></svg><span data-i18n="wb.tapEdit">Tap to edit</span></button>
         </div>
       </div>
     </section>
@@ -203,22 +313,22 @@
         <img src="assets/me/portrait-sm.webp" srcset="assets/me/portrait-sm.webp 640w, assets/me/portrait.webp 1400w" sizes="(max-width: 800px) 90vw, 40vw" alt="Portrait of Luca Tomaselli" loading="lazy" width="1400" height="1762" />
       </figure>
       <div class="about__text">
-        <span class="section__num mono">06 — About</span>
-        <h2 class="about__big">Ciao, I'm Luca.</h2>
-        <p>I'm a design student at unibz in Bolzano. I like knowing how things are made, so I make them: in cardboard, in silicone, in Rhino, in code.</p>
-        <p>My favourite place is the gap between the screen and the object — a model that turns into a print, an idea that turns into a tool someone actually uses.</p>
+        <span class="section__num mono" data-i18n="about.num">07 — About</span>
+        <h2 class="about__big" data-i18n="about.big">Ciao, I'm Luca.</h2>
+        <p data-i18n="about.p1">I'm a design student at unibz in Bolzano. I like knowing how things are made, so I make them: in cardboard, in silicone, in Rhino, in code.</p>
+        <p data-i18n="about.p2">My favourite place is the gap between the screen and the object — a model that turns into a print, an idea that turns into a tool someone actually uses.</p>
         <ul class="about__list mono">
-          <li><span>Study</span> Design & Art, unibz</li>
+          <li><span data-i18n="about.study">Study</span> Design & Art, unibz</li>
           <li><span>CAD</span> Rhino · Grasshopper</li>
-          <li><span>Make</span> 3D printing · model making</li>
-          <li><span>Code</span> Web apps · games · AI</li>
+          <li><span data-i18n="about.make">Make</span> <i data-i18n="about.makeV">3D printing · model making</i></li>
+          <li><span data-i18n="about.code">Code</span> <i data-i18n="about.codeV">Web apps · games · AI</i></li>
         </ul>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section class="contact" id="contact">
-      <p class="mono">Got an idea, a project, or a file to print?</p>
+      <p class="mono" data-i18n="contact.q">Got an idea, a project, or a file to print?</p>
       <a class="contact__big" href="https://github.com/LucaTommy" target="_blank" rel="noopener">
         <span data-stretch>SAY CIAO</span> <span class="arrow">↗</span>
       </a>
@@ -228,27 +338,39 @@
 
   <footer class="footer mono">
     <span>© 2026 Luca Tomaselli</span>
-    <span>Built by hand · hosted on GitHub Pages</span>
-    <a href="#top">Back to top ↑</a>
+    <span data-i18n="footer.built">Built by hand · hosted on GitHub Pages</span>
+    <a href="#top" data-i18n="footer.top">Back to top ↑</a>
   </footer>
 
   <!-- Gallery viewer -->
-  <dialog class="viewer" aria-label="Project gallery">
+  <dialog class="viewer" aria-label="Project gallery" data-i18n-aria="viewer.label">
     <div class="viewer__bar mono">
       <span class="viewer__title"></span>
       <span class="viewer__count"></span>
-      <button class="viewer__close" aria-label="Close">Close ✕</button>
+      <button class="viewer__close" data-i18n="close">Close ✕</button>
     </div>
     <div class="viewer__track" tabindex="0"></div>
     <div class="viewer__nav">
-      <button class="viewer__prev mono" aria-label="Previous">←</button>
-      <button class="viewer__next mono" aria-label="Next">→</button>
+      <button class="viewer__prev mono" aria-label="Previous" data-i18n-aria="viewer.prev">←</button>
+      <button class="viewer__next mono" aria-label="Next" data-i18n-aria="viewer.next">→</button>
     </div>
   </dialog>
 
+  <!-- Game player (Tuturama lives on the same domain) -->
+  <dialog class="viewer game" aria-label="Tuturama">
+    <div class="viewer__bar mono">
+      <span>Tuturama — Death in the Wheat</span>
+      <a class="game__newtab" target="_blank" rel="noopener" data-i18n="game.newtab">Open in new tab ↗</a>
+      <button class="game__close" data-i18n="close">Close ✕</button>
+    </div>
+    <iframe class="game__frame" title="Tuturama" allow="fullscreen; autoplay"></iframe>
+  </dialog>
+
   <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }</script>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-  <script type="module" src="js/printbed.js"></script>
+  <script src="js/i18n.js?v=4"></script>
+  <script src="js/data.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
+  <script type="module" src="js/printbed.js?v=4"></script>
+  <script type="module" src="js/workbench.js?v=4"></script>
 </body>
 </html>

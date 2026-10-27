@@ -29,3 +29,7 @@ Put the `.stl` in `Models/`, run `python tools/build_assets.py`, then add it to 
   `node -e "const s=require('fs').readFileSync('index.html','utf8');console.log('sha256-'+require('crypto').createHash('sha256').update(s.match(/<script type=\"importmap\">([\s\S]*?)<\/script>/)[1]).digest('base64'))"`
   and replace the `sha256-…` value in the CSP line.
 - Want to load something from another site (an embed, analytics)? Its domain has to be added to the CSP first.
+
+## After changing CSS or JS
+
+Bump the `?v=` number on the `<link>` and `<script>` tags at the bottom/top of `index.html`, so visitors don't get an old cached file mixed with new ones.
