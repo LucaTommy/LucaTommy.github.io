@@ -8,11 +8,8 @@ const finePointer = matchMedia("(pointer: fine)").matches;
 const PERF = window.PERF || { lite: false }; // set by main.js
 const S = (k, v) => I18N.s(k, v);
 
-// PLA colours, like an AMS full of spools
-const FILAMENTS = [
-  ["orange", 0xff6a13], ["white", 0xeeece6], ["black", 0x2a2a2e], ["green", 0x00ae42],
-  ["red", 0xd7263d], ["yellow", 0xf5c400], ["sky", 0x7cc4ff],
-];
+const FILAMENT = 0xff6a13; // Bambu orange PLA
+const HEAD_FILE = "assets/models/nozzle.glb"; // the real Bambu Lab A1 toolhead, nozzle tip at the origin
 
 let started = false, near = false;
 let applyQuality = () => {}; // replaced once the scene exists
@@ -77,7 +74,7 @@ async function start() {
   const ui = {
     name: $("[data-bed-name]"), size: $("[data-bed-size]"), z: $("[data-bed-z]"), stats: $("[data-bed-stats]"),
     hint: $("[data-bed-hint]"), play: $("[data-bed-play]"), playLabel: $("[data-bed-play-label]"), credit: $("[data-bed-credit]"),
-    slider: $("[data-bed-slice]"), layer: $("[data-bed-layer]"), progress: $(".bed__progress i"), colors: $("[data-bed-colors]"),
+    slider: $("[data-bed-slice]"), layer: $("[data-bed-layer]"), progress: $(".bed__progress i"),
   };
 
   /* ── Renderer, scene, camera (Z is up, like a slicer) ── */
@@ -133,7 +130,7 @@ async function start() {
 
   // Layer lines and the glow of the freshly extruded layer, added to a standard material
   const shared = { uLayer: { value: 0.2 }, uCut: { value: 0 }, uHot: { value: 0 } };
-  const solid = new THREE.MeshStandardMaterial({ color: FILAMENTS[0][1], roughness: 0.48, metalness: 0, clippingPlanes: [printed] });
+  const solid = new THREE.MeshStandardMaterial({ color: FILAMENT, roughness: 0.48, metalness: 0, clippingPlanes: [printed] });
   solid.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, shared);
     sh.vertexShader = "varying float vWz;\n" + sh.vertexShader.replace(
@@ -165,16 +162,25 @@ async function start() {
   // The current layer's real outline (sliced from the mesh) and the print head that traces it
   const contour = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xffd2a8 }));
   const head = new THREE.Group();
-  const block = new THREE.Mesh(new THREE.BoxGeometry(8, 8, 5), new THREE.MeshStandardMaterial({ color: 0x2b2d36, roughness: 0.5, metalness: 0.4 }));
-  block.position.z = 9.5;
-  const tip = new THREE.Mesh(new THREE.ConeGeometry(2.2, 5, 24), new THREE.MeshStandardMaterial({ color: 0xd4a64a, roughness: 0.3, metalness: 1 }));
-  tip.rotation.x = -Math.PI / 2;
-  tip.position.z = 3.2;
+  const headMats = [];
   const melt = new THREE.PointLight(0xff7a2a, 0, 30, 2); // warm light from the hot nozzle
   melt.position.z = 1;
-  head.add(block, tip, melt);
-  block.castShadow = tip.castShadow = true;
+  head.add(melt);
   scene.add(contour, head);
+  // the A1 toolhead arrives on its own; until then the print simply runs without it
+  new GLTFLoader().loadAsync(HEAD_FILE).then((g) => {
+    g.scene.traverse((o) => {
+      if (!o.isMesh) return;
+      o.castShadow = true;
+      o.material.roughness = 0.45;
+      o.material.metalness = 0.15;
+      o.material.transparent = true;
+      o.material.depthWrite = false; // see the print through it
+      o.renderOrder = 2;
+      headMats.push(o.material);
+    });
+    head.add(g.scene);
+  }).catch(() => {});
 
   const controls = new OrbitControls(camera, canvas);
   controls.enableZoom = false; // never steal the page scroll
@@ -198,7 +204,7 @@ async function start() {
   /* ── State ── */
   let meta = MODELS[0];
   let geom = null, size = new THREE.Vector3(), edges = null;
-  let mode = "solid", v = 1, playing = false, filament = FILAMENTS[0];
+  let mode = "solid", v = 1, playing = false;
   let tris = null, buckets = [], layerH = 0.2, total = 1, segBuf = null, segCount = 0, slicedLayer = -1;
 
   // Triangles grouped by layer, so slicing one layer only looks at the triangles that cross it
@@ -287,8 +293,9 @@ async function start() {
 
     // Frame the camera on the model
     const r = Math.max(size.x, size.y, size.z);
-    controls.target.set(0, 0, size.z * 0.4);
-    camera.position.set(r * 1.7, -r * 2.2, r * 1.35);
+    // low, from the front-side: like standing next to the printer, looking under the nozzle
+    controls.target.set(0, 0, size.z * 0.5);
+    camera.position.set(r * 2.1, -r * 2.9, r * 1.3);
     controls.update();
 
     // Rough slicer-style estimate: shells + 15% infill ≈ 60% of solid volume, PLA 1.24 g/cm³
@@ -314,7 +321,6 @@ async function start() {
     ui.name.innerHTML = `${esc(name)} <b>· ${Math.round(n).toLocaleString("en")} tri${meta.fit !== 1 ? ` · ${S("bed.scaled")}` : ""}</b>`;
     ui.credit.textContent = meta.credit || (meta.creditKey ? S(meta.creditKey) : "");
     ui.stats.title = S("bed.est");
-    ui.colors.querySelectorAll("button").forEach((b, i) => (b.title = b.ariaLabel = S(`col.${FILAMENTS[i][0]}`)));
     lastPlayState = "";
   }
 
@@ -332,12 +338,6 @@ async function start() {
     movePill(root.querySelector(".seg"));
   }
 
-  function setFilament(f) {
-    filament = f;
-    mats.solid.color.setHex(f[1]);
-    ui.colors.querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-checked", FILAMENTS[i] === f));
-  }
-
   /* ── Per-frame update ── */
   let lastPlayState = "", lastLayer = -1;
   const HOT = new THREE.Color(0xffa060);
@@ -351,7 +351,7 @@ async function start() {
     shared.uHot.value += ((playing ? 1 : 0) - shared.uHot.value) * 0.15;
 
     // cut face: filament shade, glowing while printing
-    mats.cap.color.setHex(filament[1]).multiplyScalar(0.55).lerp(HOT, shared.uHot.value * 0.8);
+    mats.cap.color.setHex(FILAMENT).multiplyScalar(0.55).lerp(HOT, shared.uHot.value * 0.8);
 
     model.children[2].visible = busy; // ghost of what's left to print
     const layer = Math.min(total, Math.floor(z / layerH));
@@ -366,7 +366,7 @@ async function start() {
       const lf = (z / layerH) % 1;
       const p = Math.min(segCount * 2 - 1, Math.floor(lf * segCount * 2));
       head.position.set(segBuf[p * 3], segBuf[p * 3 + 1], z + 0.2);
-    } else head.position.set(0, 0, z + 20);
+    } else head.position.set(0, 0, z + 30);
 
     if (layer !== lastLayer) {
       lastLayer = layer;
@@ -397,6 +397,9 @@ async function start() {
     }
     apply(t);
     controls.update();
+    // the real A1 head is huge next to a print: fade it when looking down from above
+    const fade = THREE.MathUtils.clamp((controls.getPolarAngle() - 0.6) / 0.6, 0, 1);
+    headMats.forEach((m) => (m.opacity = 0.18 + 0.4 * fade));
     renderer.render(scene, camera);
   }
   new IntersectionObserver(([e]) => {
@@ -432,10 +435,6 @@ async function start() {
     playing = true;
   });
   root.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
-
-  ui.colors.innerHTML = FILAMENTS.map(([, hex]) => `<button role="radio" aria-checked="false" style="--c:#${hex.toString(16).padStart(6, "0")}"></button>`).join("");
-  ui.colors.querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => setFilament(FILAMENTS[i])));
-  setFilament(filament);
 
   // Vertical layer slider: drag, click, wheel-free, keyboard
   const track = ui.slider.querySelector(".vslider__track");

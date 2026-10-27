@@ -7,6 +7,7 @@ import io
 import re
 from pathlib import Path
 
+import numpy
 import pymupdf
 import rawpy
 import trimesh
@@ -19,6 +20,7 @@ OUT = ROOT / "assets"
 FULL_W = 1400   # width of large images (lightbox)
 THUMB_W = 640   # width of grid images
 MAX_FACES = 60000  # triangles per 3D model, keeps each file well under 1 MB
+TOOLHEADS = {"Nozzle": 30000}  # STLs that are printer heads, not prints (name: triangle budget)
 
 
 def slug(s):
@@ -92,10 +94,20 @@ def main():
     # 3D models for the print bed: STL in, light GLB out (centred on the bed, sitting on Z=0)
     for stl in sorted(ROOT.glob("Models/*.stl")):
         mesh = trimesh.load(stl)
-        if len(mesh.faces) > MAX_FACES:
-            mesh = mesh.simplify_quadric_decimation(face_count=MAX_FACES)
+        head = stl.stem in TOOLHEADS
+        limit = TOOLHEADS.get(stl.stem, MAX_FACES)
+        if len(mesh.faces) > limit:
+            mesh = mesh.simplify_quadric_decimation(face_count=limit)
         lo, hi = mesh.bounds
-        mesh.apply_translation([-(lo[0] + hi[0]) / 2, -(lo[1] + hi[1]) / 2, -lo[2]])
+        if head:
+            # toolhead: nozzle tip (lowest point) at the origin; brass tip, light grey body
+            tip = mesh.vertices[mesh.vertices[:, 2].argmin()]
+            mesh.apply_translation(-tip)
+            brass = mesh.vertices[:, 2] < 7
+            colours = numpy.where(brass[:, None], [212, 166, 74, 255], [214, 216, 220, 255]).astype(numpy.uint8)
+            mesh.visual = trimesh.visual.ColorVisuals(mesh, vertex_colors=colours)
+        else:
+            mesh.apply_translation([-(lo[0] + hi[0]) / 2, -(lo[1] + hi[1]) / 2, -lo[2]])
         dest = OUT / "models" / f"{slug(stl.stem)}.glb"
         dest.parent.mkdir(parents=True, exist_ok=True)
         mesh.export(dest)

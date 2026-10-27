@@ -7,13 +7,13 @@
        if you edit that importmap, the hash must be updated (see README). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4WvtBMb/s94Dh3dtB87giUJejATr4xQ4tNJZPO5qdGg='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <title>Luca Tomaselli — Design, CAD & code</title>
+  <title>Luca Tomaselli — Design, CAD & AI</title>
   <meta name="description" content="Luca Tomaselli — design student at unibz, Bolzano. CAD and 3D printing, product design, typography, and games and tools built with AI." />
   <meta name="author" content="Luca Tomaselli" />
   <meta name="theme-color" content="#f2f1ec" />
   <meta property="og:type" content="profile" />
   <meta property="og:site_name" content="Luca Tomaselli" />
-  <meta property="og:title" content="Luca Tomaselli — Design, CAD & code" />
+  <meta property="og:title" content="Luca Tomaselli — Design, CAD & AI" />
   <meta property="og:description" content="CAD, 3D printing, product, typography, and tools built with AI." />
   <meta property="og:image" content="https://tommi.ink/assets/me/banner.webp" />
   <meta property="og:url" content="https://tommi.ink/" />
@@ -21,7 +21,7 @@
   <link rel="canonical" href="https://tommi.ink/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preload" href="vendor/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
   <!-- Tells search engines who this page is about -->
   <script type="application/ld+json">
     {
@@ -73,6 +73,16 @@
     <symbol id="s-cone" viewBox="0 0 24 24"><path d="M12 3 5 18.5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="s-torus" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="11.5" rx="3.5" ry="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
     <symbol id="s-capsule" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M4 4l16 16M9.9 5.8A9.7 9.7 0 0 1 12 5.5C18 5.5 21.5 12 21.5 12a17 17 0 0 1-2.6 3.5M6.2 7.2A16 16 0 0 0 2.5 12S6 18.5 12 18.5c1.5 0 2.9-.4 4.1-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="15.5" cy="9" r="1.5" fill="currentColor"/></symbol>
+    <symbol id="i-frame" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10m4 0h2M4 17h4m4 0h8M14 4v6M8 14v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="s-tube" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="5.5" rx="3.5" ry="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="s-wedge" viewBox="0 0 24 24"><path d="M3 19h13V6zM16 6l5 3v10h-5M16 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="s-dome" viewBox="0 0 24 24"><path d="M3 16a9 9 0 0 1 18 0z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="12" cy="16" rx="9" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
   </svg>
 
   <header class="nav">
@@ -163,7 +173,7 @@
       <div class="section__head">
         <span class="section__num mono">04</span>
         <h2 class="section__title" data-split data-i18n="tools.title">Tools I needed</h2>
-        <p class="section__lede" data-i18n="tools.lede">When I need something, I build it — with AI as the pair programmer. Everything runs in the browser.</p>
+        <p class="section__lede" data-i18n="tools.lede">When I need something, I vibe-code it: I describe what I want, the AI writes the code, and I design and test until it works. Everything runs in the browser.</p>
       </div>
       <div class="tools" data-tools></div>
     </section>
@@ -173,7 +183,7 @@
       <div class="section__head">
         <span class="section__num mono">05</span>
         <h2 class="section__title" data-split data-i18n="bed.title">Layer by layer</h2>
-        <p class="section__lede" data-i18n="bed.lede">The test print every 3D printer owner knows. Spin it, scrub through its layers, change the filament — or press print and watch it grow.</p>
+        <p class="section__lede" data-i18n="bed.lede">The test print every 3D printer owner knows, under a real Bambu Lab A1 head. Spin it, scrub through its layers — or press print and watch it grow.</p>
       </div>
       <div class="hobby">
         <!-- Interactive print bed: three.js loads only when you scroll near it -->
@@ -210,7 +220,6 @@
               <button aria-pressed="false" data-mode="wire" data-i18n="bed.edges">Edges</button>
               <button aria-pressed="false" data-mode="xray" data-i18n="bed.xray">X-ray</button>
             </div>
-            <div class="swatches" role="radiogroup" aria-label="Filament" data-i18n-aria="bed.filament" data-bed-colors></div>
             <div class="panel__group panel__group--end">
               <button class="ibtn bed__touch" data-bed-touch aria-pressed="false"><svg><use href="#i-hand" /></svg><span data-i18n="bed.rotate">Rotate</span></button>
               <label class="ibtn"><svg><use href="#i-upload" /></svg><span data-i18n="bed.upload">Your STL</span><input type="file" accept=".stl" data-bed-file hidden /></label>
@@ -225,7 +234,7 @@
           </div>
           <div>
             <h3 class="mono" data-i18n="hobby.h2">AI → software</h3>
-            <p data-i18n="hobby.p2">I use AI to go from idea to working thing fast: games, the tools above, small programs. I like to understand what it writes, so every project teaches me a bit more code.</p>
+            <p data-i18n="hobby.p2">I don't write code — I vibe-code. I describe the idea, the AI writes it, and I steer the design until it feels right: games, the tools above, small programs.</p>
           </div>
           <div class="hobby__now mono">
             <img src="assets/hobby/bambu-lab-sm.webp" alt="My Bambu Lab printer" loading="lazy" width="640" height="518" />
@@ -235,71 +244,146 @@
       </div>
     </section>
 
-    <!-- WORKBENCH: a tiny Blender -->
+    <!-- WORKBENCH: a tiny Blender with a purpose — make something printable -->
     <section class="section section--dark" id="workbench">
       <div class="section__head">
         <span class="section__num mono">06</span>
         <h2 class="section__title" data-split data-i18n="wb.title">Workbench</h2>
-        <p class="section__lede" data-i18n="wb.lede">A tiny Blender in the browser. Add shapes, move, rotate and scale them — then send your model to the printer above.</p>
+        <p class="section__lede" data-i18n="wb.lede">A tiny Blender with one job: make something you could actually print. Start from a template or an empty bed, shape it, check it in Preview — overhangs, size, filament — then send it to the printer above.</p>
       </div>
       <div class="wb" data-workbench>
         <div class="wb__view">
           <canvas class="wb__canvas" aria-label="3D modelling workspace"></canvas>
 
-          <div class="wb__top">
-            <div class="wb__addwrap">
-              <button class="wbtn wbtn--accent" data-wb-addtoggle aria-expanded="false"><svg><use href="#i-plus" /></svg><span data-i18n="wb.add">Add</span></button>
-              <div class="wb__addmenu" data-wb-addmenu hidden>
-                <button data-wb-add="cube"><svg><use href="#s-cube" /></svg><span data-i18n="wb.cube">Cube</span></button>
-                <button data-wb-add="sphere"><svg><use href="#s-sphere" /></svg><span data-i18n="wb.sphere">Sphere</span></button>
-                <button data-wb-add="cylinder"><svg><use href="#s-cylinder" /></svg><span data-i18n="wb.cylinder">Cylinder</span></button>
-                <button data-wb-add="cone"><svg><use href="#s-cone" /></svg><span data-i18n="wb.cone">Cone</span></button>
-                <button data-wb-add="torus"><svg><use href="#s-torus" /></svg><span data-i18n="wb.torus">Torus</span></button>
-                <button data-wb-add="capsule"><svg><use href="#s-capsule" /></svg><span data-i18n="wb.capsule">Capsule</span></button>
+          <!-- header: file menu, workspaces, stats, print -->
+          <header class="wb__head">
+            <div class="wb__menuwrap">
+              <button class="wbtn" data-wb-menu aria-expanded="false"><svg><use href="#i-menu" /></svg><span data-i18n="wb.file">File</span></button>
+              <div class="wb__menu" data-wb-menupanel hidden>
+                <p class="wb__menuh mono" data-i18n="wb.templates">Start from</p>
+                <div class="wb__templates">
+                  <button data-wb-template="robot"><i style="--c:#ff6a13"></i><span data-i18n="wb.t.robot">Robot</span></button>
+                  <button data-wb-template="stand"><i style="--c:#2a2a2e"></i><span data-i18n="wb.t.stand">Phone stand</span></button>
+                  <button data-wb-template="pen"><i style="--c:#eeece6"></i><span data-i18n="wb.t.pen">Pen holder</span></button>
+                  <button data-wb-template="key"><i style="--c:#00ae42"></i><span data-i18n="wb.t.key">Keychain</span></button>
+                  <button data-wb-template="rocket"><i style="--c:#d7263d"></i><span data-i18n="wb.t.rocket">Rocket</span></button>
+                  <button data-wb-template="empty"><i style="--c:transparent"></i><span data-i18n="wb.t.empty">Empty bed</span></button>
+                </div>
+                <hr />
+                <label class="wb__menuitem"><svg><use href="#i-upload" /></svg><span data-i18n="wb.import">Import STL…</span><input type="file" accept=".stl" data-wb-import hidden /></label>
+                <button class="wb__menuitem" data-wb-act="export"><svg><use href="#i-download" /></svg><span data-i18n="wb.export">Export STL</span></button>
+                <button class="wb__menuitem" data-wb-act="shot"><svg><use href="#i-image" /></svg><span data-i18n="wb.shot">Save image</span></button>
               </div>
             </div>
-            <div class="seg seg--dark mono" role="group" aria-label="Transform">
+            <div class="seg seg--dark wb__ws mono" role="tablist" aria-label="Workspace">
               <span class="seg__pill" aria-hidden="true"></span>
-              <button data-wb-mode="translate" aria-pressed="true" title="G"><svg><use href="#i-move" /></svg><span data-i18n="wb.move">Move</span></button>
-              <button data-wb-mode="rotate" aria-pressed="false" title="R"><svg><use href="#i-rotate" /></svg><span data-i18n="wb.rotate">Rotate</span></button>
-              <button data-wb-mode="scale" aria-pressed="false" title="S"><svg><use href="#i-scale" /></svg><span data-i18n="wb.scale">Scale</span></button>
+              <button data-wb-ws="model" aria-pressed="true" title="Tab"><svg><use href="#s-cube" /></svg><span data-i18n="wb.model">Model</span></button>
+              <button data-wb-ws="preview" aria-pressed="false" title="Tab"><svg><use href="#i-eye" /></svg><span data-i18n="wb.preview">Preview</span></button>
             </div>
-            <span class="wb__count mono" data-wb-count></span>
+            <span class="wb__stats mono" data-wb-stats></span>
             <button class="wbtn wbtn--icon" data-wb-full aria-label="Fullscreen" data-i18n-aria="wb.full"><svg><use href="#i-full" /></svg><span class="wb__doneLabel" data-i18n="wb.done">Done</span></button>
-          </div>
+            <button class="wbtn wbtn--accent" data-wb-act="send"><svg><use href="#i-print" /></svg><span data-i18n="wb.send">Print it</span></button>
+          </header>
 
-          <aside class="wb__props" data-wb-props>
-            <p class="wb__sel mono" data-wb-sel data-i18n="wb.none">Tap a shape to select it</p>
-            <div class="wb__edit" data-wb-edit hidden>
-              <span class="wb__label mono" data-i18n="wb.size">Size (mm)</span>
-              <div class="wb__sizes mono">
-                <label><b class="ax-x">X</b><input type="number" min="1" max="250" step="1" data-wb-size="x" /></label>
-                <label><b class="ax-y">Y</b><input type="number" min="1" max="250" step="1" data-wb-size="y" /></label>
-                <label><b class="ax-z">Z</b><input type="number" min="1" max="250" step="1" data-wb-size="z" /></label>
-              </div>
-              <span class="wb__label mono" data-i18n="wb.colour">Colour</span>
-              <div class="swatches swatches--small" data-wb-colors></div>
-              <div class="wb__actions">
-                <button class="wbtn" data-wb-act="dup"><svg><use href="#i-copy" /></svg><span data-i18n="wb.dup">Duplicate</span></button>
-                <button class="wbtn" data-wb-act="drop"><svg><use href="#i-down" /></svg><span data-i18n="wb.drop">Drop to bed</span></button>
-                <button class="wbtn wbtn--danger" data-wb-act="del"><svg><use href="#i-trash" /></svg><span data-i18n="wb.del">Delete</span></button>
-              </div>
+          <!-- left: tools and shapes -->
+          <aside class="wb__tools">
+            <div class="wb__toolgroup" role="group" aria-label="Transform">
+              <button data-wb-mode="translate" aria-pressed="true" data-tip="wb.move" data-key="G"><svg><use href="#i-move" /></svg></button>
+              <button data-wb-mode="rotate" aria-pressed="false" data-tip="wb.rotate" data-key="R"><svg><use href="#i-rotate" /></svg></button>
+              <button data-wb-mode="scale" aria-pressed="false" data-tip="wb.scale" data-key="S"><svg><use href="#i-scale" /></svg></button>
             </div>
+            <button class="wb__addToggle" data-wb-addtoggle aria-expanded="false" aria-label="Add"><svg><use href="#i-plus" /></svg></button>
+            <div class="wb__shapes" data-wb-shapes>
+              <button data-wb-add="cube" data-tip="wb.cube"><svg><use href="#s-cube" /></svg></button>
+              <button data-wb-add="sphere" data-tip="wb.sphere"><svg><use href="#s-sphere" /></svg></button>
+              <button data-wb-add="cylinder" data-tip="wb.cylinder"><svg><use href="#s-cylinder" /></svg></button>
+              <button data-wb-add="cone" data-tip="wb.cone"><svg><use href="#s-cone" /></svg></button>
+              <button data-wb-add="torus" data-tip="wb.torus"><svg><use href="#s-torus" /></svg></button>
+              <button data-wb-add="capsule" data-tip="wb.capsule"><svg><use href="#s-capsule" /></svg></button>
+              <button data-wb-add="tube" data-tip="wb.tube"><svg><use href="#s-tube" /></svg></button>
+              <button data-wb-add="wedge" data-tip="wb.wedge"><svg><use href="#s-wedge" /></svg></button>
+              <button data-wb-add="dome" data-tip="wb.dome"><svg><use href="#s-dome" /></svg></button>
+            </div>
+            <button class="wb__sheetToggle" data-wb-sheet aria-expanded="false" aria-label="Properties" data-i18n-aria="wb.props"><svg><use href="#i-sliders" /></svg></button>
           </aside>
 
-          <div class="wb__bottom">
-            <button class="wbtn wbtn--icon" data-wb-act="undo" aria-label="Undo" data-i18n-aria="wb.undo"><svg><use href="#i-undo" /></svg></button>
-            <button class="wbtn wbtn--icon" data-wb-act="redo" aria-label="Redo" data-i18n-aria="wb.redo"><svg><use href="#i-redo" /></svg></button>
-            <span class="wb__sep"></span>
-            <button class="wbtn" data-wb-toggle="snap" aria-pressed="true"><svg><use href="#i-magnet" /></svg><span data-i18n="wb.snap">Snap</span></button>
-            <button class="wbtn" data-wb-toggle="wire" aria-pressed="false"><svg><use href="#i-wire" /></svg><span data-i18n="wb.wire">Wire</span></button>
-            <button class="wbtn" data-wb-act="clear"><svg><use href="#i-clear" /></svg><span data-i18n="wb.clear">Clear</span></button>
-            <span class="wb__grow"></span>
-            <button class="wbtn" data-wb-act="export"><svg><use href="#i-download" /></svg><span data-i18n="wb.export">Export STL</span></button>
-            <button class="wbtn wbtn--accent" data-wb-act="send"><svg><use href="#i-print" /></svg><span data-i18n="wb.send">Send to printer</span></button>
-          </div>
+          <!-- right: outliner, properties, print check -->
+          <aside class="wb__side" data-wb-side>
+            <section class="wb__panel wb__panel--list">
+              <h4 class="wb__ph mono"><span data-i18n="wb.outliner">Objects</span><span data-wb-count></span></h4>
+              <ul class="wb__outliner" data-wb-outliner></ul>
+            </section>
 
-          <p class="wb__keys mono" data-i18n="wb.keys">G move · R rotate · S scale · X delete · Shift+D duplicate · Ctrl+Z undo</p>
+            <section class="wb__panel" data-wb-props>
+              <h4 class="wb__ph mono"><span data-wb-selname data-i18n="wb.none">Click a shape to select it</span></h4>
+              <div class="wb__edit" data-wb-edit hidden>
+                <span class="wb__label mono" data-i18n="wb.loc">Location (mm)</span>
+                <div class="wb__xyz mono">
+                  <label><b class="ax-x">X</b><input type="number" step="1" data-wb-f="px" /></label>
+                  <label><b class="ax-y">Y</b><input type="number" step="1" data-wb-f="py" /></label>
+                  <label><b class="ax-z">Z</b><input type="number" step="1" data-wb-f="pz" /></label>
+                </div>
+                <span class="wb__label mono" data-i18n="wb.rot">Rotation (°)</span>
+                <div class="wb__xyz mono">
+                  <label><b class="ax-x">X</b><input type="number" step="15" data-wb-f="rx" /></label>
+                  <label><b class="ax-y">Y</b><input type="number" step="15" data-wb-f="ry" /></label>
+                  <label><b class="ax-z">Z</b><input type="number" step="15" data-wb-f="rz" /></label>
+                </div>
+                <span class="wb__label mono"><span data-i18n="wb.size">Size (mm)</span>
+                  <button class="wb__lock" data-wb-lock aria-pressed="false" data-tip="wb.lock"><svg><use href="#i-lock" /></svg></button>
+                </span>
+                <div class="wb__xyz mono">
+                  <label><b class="ax-x">X</b><input type="number" min="0.5" step="1" data-wb-f="sx" /></label>
+                  <label><b class="ax-y">Y</b><input type="number" min="0.5" step="1" data-wb-f="sy" /></label>
+                  <label><b class="ax-z">Z</b><input type="number" min="0.5" step="1" data-wb-f="sz" /></label>
+                </div>
+                <span class="wb__label mono" data-i18n="wb.colour">Colour</span>
+                <div class="swatches swatches--small" data-wb-colors></div>
+                <div class="wb__actions">
+                  <button class="wbtn" data-wb-act="dup" data-tip="wb.dup" data-key="⇧D"><svg><use href="#i-copy" /></svg></button>
+                  <button class="wbtn" data-wb-act="drop" data-tip="wb.drop"><svg><use href="#i-down" /></svg></button>
+                  <button class="wbtn" data-wb-act="frame" data-tip="wb.frame" data-key="F"><svg><use href="#i-frame" /></svg></button>
+                  <button class="wbtn wbtn--danger" data-wb-act="del" data-tip="wb.del" data-key="X"><svg><use href="#i-trash" /></svg></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="wb__panel wb__check" data-wb-check>
+              <h4 class="wb__ph mono" data-i18n="wb.check">Print check</h4>
+              <ul class="wb__checklist" data-wb-checklist></ul>
+              <p class="wb__est mono" data-wb-est></p>
+              <div class="wb__checkopts">
+                <button class="wbtn" data-wb-toggle="over" aria-pressed="true"><span data-i18n="wb.overhangs">Show overhangs</span></button>
+                <button class="wbtn" data-wb-toggle="turn" aria-pressed="true"><span data-i18n="wb.turn">Turntable</span></button>
+              </div>
+            </section>
+          </aside>
+
+          <!-- bottom status bar -->
+          <footer class="wb__foot">
+            <button class="wbtn wbtn--icon" data-wb-act="undo" data-tip="wb.undo" data-key="Ctrl+Z"><svg><use href="#i-undo" /></svg></button>
+            <button class="wbtn wbtn--icon" data-wb-act="redo" data-tip="wb.redo" data-key="Ctrl+Y"><svg><use href="#i-redo" /></svg></button>
+            <span class="wb__sep"></span>
+            <label class="wb__snap wbtn" data-tip="wb.snap"><svg><use href="#i-magnet" /></svg>
+              <select data-wb-snap aria-label="Snap">
+                <option value="0" data-i18n="wb.off">Off</option>
+                <option value="1">1 mm</option>
+                <option value="5" selected>5 mm</option>
+                <option value="10">10 mm</option>
+              </select>
+            </label>
+            <button class="wbtn" data-wb-toggle="bed" aria-pressed="true" data-tip="wb.bedTip"><svg><use href="#i-down" /></svg><span data-i18n="wb.bed">Keep on bed</span></button>
+            <span class="wb__grow"></span>
+            <div class="wb__views mono" role="group" aria-label="View">
+              <button data-wb-view="persp" data-key="0" data-i18n="wb.persp">Persp</button>
+              <button data-wb-view="top" data-key="7" data-i18n="wb.top">Top</button>
+              <button data-wb-view="front" data-key="1" data-i18n="wb.front">Front</button>
+              <button data-wb-view="right" data-key="3" data-i18n="wb.right">Right</button>
+            </div>
+          </footer>
+
+          <p class="wb__keys mono" data-i18n="wb.keys">G move · R rotate · S scale · X delete · Shift+D duplicate · F frame · Tab preview · Ctrl+Z undo</p>
+          <div class="wb__tip mono" data-wb-tipbox hidden></div>
           <div class="wb__toast mono" data-wb-toast role="status"></div>
           <button class="bigbtn bigbtn--dark mono" data-wb-open hidden><span data-i18n="wb.open">▶ Open Workbench</span><small data-i18n="wb.openSmall">Loads the 3D editor</small></button>
           <button class="wb__tap mono" data-wb-tap hidden><svg><use href="#i-full" /></svg><span data-i18n="wb.tapEdit">Tap to edit</span></button>
@@ -315,13 +399,13 @@
       <div class="about__text">
         <span class="section__num mono" data-i18n="about.num">07 — About</span>
         <h2 class="about__big" data-i18n="about.big">Ciao, I'm Luca.</h2>
-        <p data-i18n="about.p1">I'm a design student at unibz in Bolzano. I like knowing how things are made, so I make them: in cardboard, in silicone, in Rhino, in code.</p>
+        <p data-i18n="about.p1">I'm a design student at unibz in Bolzano. I like knowing how things are made, so I make them: in cardboard, in silicone, in Rhino — and with AI.</p>
         <p data-i18n="about.p2">My favourite place is the gap between the screen and the object — a model that turns into a print, an idea that turns into a tool someone actually uses.</p>
         <ul class="about__list mono">
           <li><span data-i18n="about.study">Study</span> Design & Art, unibz</li>
           <li><span>CAD</span> Rhino · Grasshopper</li>
           <li><span data-i18n="about.make">Make</span> <i data-i18n="about.makeV">3D printing · model making</i></li>
-          <li><span data-i18n="about.code">Code</span> <i data-i18n="about.codeV">Web apps · games · AI</i></li>
+          <li><span data-i18n="about.code">AI</span> <i data-i18n="about.codeV">Vibe coding · web apps · games</i></li>
         </ul>
       </div>
     </section>
@@ -338,7 +422,7 @@
 
   <footer class="footer mono">
     <span>© 2026 Luca Tomaselli</span>
-    <span data-i18n="footer.built">Built by hand · hosted on GitHub Pages</span>
+    <span data-i18n="footer.built">Vibe-coded · hosted on GitHub Pages</span>
     <a href="#top" data-i18n="footer.top">Back to top ↑</a>
   </footer>
 
@@ -367,10 +451,10 @@
   </dialog>
 
   <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }</script>
-  <script src="js/i18n.js?v=4"></script>
-  <script src="js/data.js?v=4"></script>
-  <script src="js/main.js?v=4"></script>
-  <script type="module" src="js/printbed.js?v=4"></script>
-  <script type="module" src="js/workbench.js?v=4"></script>
+  <script src="js/i18n.js?v=6"></script>
+  <script src="js/data.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
+  <script type="module" src="js/printbed.js?v=6"></script>
+  <script type="module" src="js/workbench.js?v=6"></script>
 </body>
 </html>
