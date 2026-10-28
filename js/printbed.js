@@ -41,6 +41,7 @@ if (root) {
     io.disconnect();
     near = true;
     if (!PERF.lite) return boot();
+    if (started) return; // already loaded on request
     load.hidden = false;
     $("[data-bed-name]").textContent = S("bed.paused");
   }, { rootMargin: "600px 0px" });

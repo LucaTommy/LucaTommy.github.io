@@ -21,7 +21,7 @@
   <link rel="canonical" href="https://tommi.ink/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preload" href="vendor/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
   <!-- Tells search engines who this page is about -->
   <script type="application/ld+json">
     {
@@ -83,6 +83,34 @@
     <symbol id="s-tube" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="5.5" rx="3.5" ry="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
     <symbol id="s-wedge" viewBox="0 0 24 24"><path d="M3 19h13V6zM16 6l5 3v10h-5M16 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="s-dome" viewBox="0 0 24 24"><path d="M3 16a9 9 0 0 1 18 0z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="12" cy="16" rx="9" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.2"/></symbol>
+    <symbol id="b-object" viewBox="0 0 24 24"><path d="M5 7.5 12 4l7 3.5v9L12 20l-7-3.5z" fill="#e8873a"/><path d="M5 7.5 12 11l7-3.5M12 11v9" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.2"/></symbol>
+    <symbol id="b-edit" viewBox="0 0 24 24"><path d="M4 18 12 5l8 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="5" r="2" fill="#ff9a2e"/><circle cx="4" cy="18" r="2" fill="currentColor"/><circle cx="20" cy="18" r="2" fill="currentColor"/></symbol>
+    <symbol id="b-dd" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="b-vert" viewBox="0 0 24 24"><path d="M5 9 12 5l7 4v8l-7 4-7-4z" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.4"/><circle cx="12" cy="5" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="b-edge" viewBox="0 0 24 24"><path d="M5 9 12 5l7 4v8l-7 4-7-4z" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.4"/><path d="M12 5 19 9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="b-face" viewBox="0 0 24 24"><path d="M5 9 12 5l7 4v8l-7 4-7-4z" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.4"/><path d="M5 9 12 5l7 4-7 4z" fill="currentColor"/></symbol>
+    <symbol id="b-global" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="b-xray" viewBox="0 0 24 24"><rect x="4" y="4" width="11" height="11" rx="1" fill="currentColor" fill-opacity=".35" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="11" height="11" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="b-wire" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="3.5" ry="8" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M4 12h16" stroke="currentColor" stroke-width="1.2"/></symbol>
+    <symbol id="b-solid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor"/></symbol>
+    <symbol id="b-material" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/><circle cx="9" cy="9" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="b-rendered" viewBox="0 0 24 24"><defs><radialGradient id="b-rg" cx=".35" cy=".35" r=".75"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="currentColor" stop-opacity=".2"/></radialGradient></defs><circle cx="12" cy="12" r="8" fill="url(#b-rg)" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="b-outliner" viewBox="0 0 24 24"><path d="M4 5h6M8 10h12M8 15h12M8 20h12M6 7v13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="b-objprop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2.5" fill="#e8873a"/></symbol>
+    <symbol id="b-zoom" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="b-grid" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16M8 4v16M16 4v16" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="b-select" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.5 2"/><path d="M11 11v10l2.6-2.6 2.2 4.1 1.7-.9-2.2-4.1H19z" fill="currentColor"/></symbol>
+    <symbol id="b-cursor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="none" stroke="#ff4a4a" stroke-width="1.8" stroke-dasharray="3.2 2.6"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="b-extrude" viewBox="0 0 24 24"><path d="M4 15 12 11l8 4-8 4z" fill="currentColor" fill-opacity=".4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M12 11V3m0 0-3 3m3-3 3 3" fill="none" stroke="#ff9a2e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="b-inset" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="8" width="8" height="8" fill="#ff9a2e" fill-opacity=".7"/><path d="M3.5 3.5 8 8M20.5 3.5 16 8M3.5 20.5 8 16M20.5 20.5 16 16" stroke="currentColor" stroke-width="1.2"/></symbol>
+    <symbol id="b-addcube" viewBox="0 0 24 24"><path d="M6 10 12 7l6 3v7l-6 3-6-3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 10l6 3 6-3M12 13v7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4 2v6M1 5h6" stroke="#8bdc00" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="b-mesh" viewBox="0 0 24 24"><path d="M4 5h16l-8 15z" fill="#e8873a"/></symbol>
+    <symbol id="b-meshdata" viewBox="0 0 24 24"><path d="M5 6h14l-7 12z" fill="none" stroke="#3fd2a0" stroke-width="1.6" stroke-linejoin="round"/><circle cx="5" cy="6" r="1.8" fill="#3fd2a0"/><circle cx="19" cy="6" r="1.8" fill="#3fd2a0"/><circle cx="12" cy="18" r="1.8" fill="#3fd2a0"/></symbol>
+    <symbol id="b-collection" viewBox="0 0 24 24"><path d="M4 6h16v4H4zM5 10h14v9H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="b-camera" viewBox="0 0 24 24"><path d="M3 8h4l2-2.5h6L17 8h4v11H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="b-check" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3" fill="currentColor"/><path d="m7.5 12 3 3 6-6.5" fill="none" stroke="#1d1d1d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="b-uncheck" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="b-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
   <header class="nav">
@@ -244,150 +272,85 @@
       </div>
     </section>
 
-    <!-- WORKBENCH: a tiny Blender with a purpose — make something printable -->
+    <!-- WORKBENCH: a small Blender in the browser, made for printing -->
     <section class="section section--dark" id="workbench">
       <div class="section__head">
         <span class="section__num mono">06</span>
         <h2 class="section__title" data-split data-i18n="wb.title">Workbench</h2>
-        <p class="section__lede" data-i18n="wb.lede">A tiny Blender with one job: make something you could actually print. Start from a template or an empty bed, shape it, check it in Preview — overhangs, size, filament — then send it to the printer above.</p>
+        <p class="section__lede" data-i18n="wb.lede">A small Blender in the browser, made for printing. Object and Edit Mode, extrude and inset, G / R / S with axis locks, an outliner — then check the model in the Print tab and send it to the printer above.</p>
       </div>
       <div class="wb" data-workbench>
-        <div class="wb__view">
-          <canvas class="wb__canvas" aria-label="3D modelling workspace"></canvas>
-
-          <!-- header: file menu, workspaces, stats, print -->
-          <header class="wb__head">
-            <div class="wb__menuwrap">
-              <button class="wbtn" data-wb-menu aria-expanded="false"><svg><use href="#i-menu" /></svg><span data-i18n="wb.file">File</span></button>
-              <div class="wb__menu" data-wb-menupanel hidden>
-                <p class="wb__menuh mono" data-i18n="wb.templates">Start from</p>
-                <div class="wb__templates">
-                  <button data-wb-template="robot"><i style="--c:#ff6a13"></i><span data-i18n="wb.t.robot">Robot</span></button>
-                  <button data-wb-template="stand"><i style="--c:#2a2a2e"></i><span data-i18n="wb.t.stand">Phone stand</span></button>
-                  <button data-wb-template="pen"><i style="--c:#eeece6"></i><span data-i18n="wb.t.pen">Pen holder</span></button>
-                  <button data-wb-template="key"><i style="--c:#00ae42"></i><span data-i18n="wb.t.key">Keychain</span></button>
-                  <button data-wb-template="rocket"><i style="--c:#d7263d"></i><span data-i18n="wb.t.rocket">Rocket</span></button>
-                  <button data-wb-template="empty"><i style="--c:transparent"></i><span data-i18n="wb.t.empty">Empty bed</span></button>
-                </div>
-                <hr />
-                <label class="wb__menuitem"><svg><use href="#i-upload" /></svg><span data-i18n="wb.import">Import STL…</span><input type="file" accept=".stl" data-wb-import hidden /></label>
-                <button class="wb__menuitem" data-wb-act="export"><svg><use href="#i-download" /></svg><span data-i18n="wb.export">Export STL</span></button>
-                <button class="wb__menuitem" data-wb-act="shot"><svg><use href="#i-image" /></svg><span data-i18n="wb.shot">Save image</span></button>
+        <div class="wb__app">
+          <!-- 3D viewport -->
+          <div class="wb__view">
+            <canvas class="wb__canvas" aria-label="3D viewport"></canvas>
+            <header class="wb__hdr">
+              <button class="wb__hb" data-menu="file">File</button>
+              <button class="wb__hb wb__mode" data-menu="mode"><svg><use href="#b-object" /></svg><span data-wb-modename>Object Mode</span><svg class="wb__dd"><use href="#b-dd" /></svg></button>
+              <div class="wb__grp" data-wb-selmode hidden>
+                <button data-sel="vert" title="Vertex select (1)"><svg><use href="#b-vert" /></svg></button>
+                <button data-sel="edge" title="Edge select (2)"><svg><use href="#b-edge" /></svg></button>
+                <button data-sel="face" title="Face select (3)"><svg><use href="#b-face" /></svg></button>
               </div>
-            </div>
-            <div class="seg seg--dark wb__ws mono" role="tablist" aria-label="Workspace">
-              <span class="seg__pill" aria-hidden="true"></span>
-              <button data-wb-ws="model" aria-pressed="true" title="Tab"><svg><use href="#s-cube" /></svg><span data-i18n="wb.model">Model</span></button>
-              <button data-wb-ws="preview" aria-pressed="false" title="Tab"><svg><use href="#i-eye" /></svg><span data-i18n="wb.preview">Preview</span></button>
-            </div>
-            <span class="wb__stats mono" data-wb-stats></span>
-            <button class="wbtn wbtn--icon" data-wb-full aria-label="Fullscreen" data-i18n-aria="wb.full"><svg><use href="#i-full" /></svg><span class="wb__doneLabel" data-i18n="wb.done">Done</span></button>
-            <button class="wbtn wbtn--accent" data-wb-act="send"><svg><use href="#i-print" /></svg><span data-i18n="wb.send">Print it</span></button>
-          </header>
+              <nav class="wb__menus">
+                <button class="wb__hb" data-menu="view">View</button>
+                <button class="wb__hb" data-menu="select">Select</button>
+                <button class="wb__hb" data-menu="add">Add</button>
+                <button class="wb__hb" data-menu="object" data-wb-objmenu>Object</button>
+              </nav>
+              <span class="wb__grow"></span>
+              <button class="wb__hb wb__space" data-wb-space title="Transform orientation"><svg><use href="#b-global" /></svg><span>Global</span></button>
+              <div class="wb__grp">
+                <button data-wb-snap aria-pressed="false" title="Snap (hold Ctrl to invert)"><svg><use href="#i-magnet" /></svg></button>
+                <select data-wb-inc aria-label="Snap increment"><option value="1">1 mm</option><option value="5" selected>5 mm</option><option value="10">10 mm</option></select>
+              </div>
+              <button class="wb__hb wb__ico" data-wb-xray aria-pressed="false" title="Toggle X-Ray (Alt Z)"><svg><use href="#b-xray" /></svg></button>
+              <div class="wb__grp" role="group" aria-label="Viewport shading">
+                <button data-shade="wire" title="Wireframe"><svg><use href="#b-wire" /></svg></button>
+                <button data-shade="solid" title="Solid" aria-pressed="true"><svg><use href="#b-solid" /></svg></button>
+                <button data-shade="material" title="Material Preview"><svg><use href="#b-material" /></svg></button>
+                <button data-shade="rendered" title="Rendered (print preview)"><svg><use href="#b-rendered" /></svg></button>
+              </div>
+              <button class="wb__hb wb__ico" data-wb-panels aria-pressed="false" title="Outliner & Properties (N)"><svg><use href="#b-outliner" /></svg></button>
+              <button class="wb__hb wb__ico" data-wb-full title="Fullscreen"><svg><use href="#i-full" /></svg><span class="wb__doneLabel" data-i18n="wb.done">Done</span></button>
+            </header>
 
-          <!-- left: tools and shapes -->
-          <aside class="wb__tools">
-            <div class="wb__toolgroup" role="group" aria-label="Transform">
-              <button data-wb-mode="translate" aria-pressed="true" data-tip="wb.move" data-key="G"><svg><use href="#i-move" /></svg></button>
-              <button data-wb-mode="rotate" aria-pressed="false" data-tip="wb.rotate" data-key="R"><svg><use href="#i-rotate" /></svg></button>
-              <button data-wb-mode="scale" aria-pressed="false" data-tip="wb.scale" data-key="S"><svg><use href="#i-scale" /></svg></button>
+            <aside class="wb__tb" data-wb-tools></aside>
+            <div class="wb__info"><span data-wb-viewname>User Perspective</span><span data-wb-active>(1) Collection</span></div>
+            <div class="wb__navi">
+              <canvas class="wb__axes" data-wb-axes width="200" height="200" title="Click an axis to view along it · drag to orbit"></canvas>
+              <button data-nav="zoom" title="Zoom (drag)"><svg><use href="#b-zoom" /></svg></button>
+              <button data-nav="pan" title="Move the view (drag)"><svg><use href="#i-hand" /></svg></button>
+              <button data-nav="ortho" title="Perspective / Orthographic (Numpad 5)"><svg><use href="#b-grid" /></svg></button>
             </div>
-            <button class="wb__addToggle" data-wb-addtoggle aria-expanded="false" aria-label="Add"><svg><use href="#i-plus" /></svg></button>
-            <div class="wb__shapes" data-wb-shapes>
-              <button data-wb-add="cube" data-tip="wb.cube"><svg><use href="#s-cube" /></svg></button>
-              <button data-wb-add="sphere" data-tip="wb.sphere"><svg><use href="#s-sphere" /></svg></button>
-              <button data-wb-add="cylinder" data-tip="wb.cylinder"><svg><use href="#s-cylinder" /></svg></button>
-              <button data-wb-add="cone" data-tip="wb.cone"><svg><use href="#s-cone" /></svg></button>
-              <button data-wb-add="torus" data-tip="wb.torus"><svg><use href="#s-torus" /></svg></button>
-              <button data-wb-add="capsule" data-tip="wb.capsule"><svg><use href="#s-capsule" /></svg></button>
-              <button data-wb-add="tube" data-tip="wb.tube"><svg><use href="#s-tube" /></svg></button>
-              <button data-wb-add="wedge" data-tip="wb.wedge"><svg><use href="#s-wedge" /></svg></button>
-              <button data-wb-add="dome" data-tip="wb.dome"><svg><use href="#s-dome" /></svg></button>
-            </div>
-            <button class="wb__sheetToggle" data-wb-sheet aria-expanded="false" aria-label="Properties" data-i18n-aria="wb.props"><svg><use href="#i-sliders" /></svg></button>
-          </aside>
+            <div class="wb__modal" data-wb-modal hidden></div>
+            <div class="wb__cursor" data-wb-cursor aria-hidden="true"></div>
+            <div class="wb__box" data-wb-box hidden></div>
+            <div class="wb__pop" data-wb-pop hidden></div>
+            <div class="wb__tip" data-wb-tip hidden></div>
+            <div class="wb__toast" data-wb-toast role="status"></div>
+            <footer class="wb__status"><span data-wb-hints></span><span data-wb-stats></span></footer>
+            <button class="bigbtn bigbtn--dark mono" data-wb-open hidden><span data-i18n="wb.open">▶ Open Workbench</span><small data-i18n="wb.openSmall">Loads the 3D editor</small></button>
+            <button class="wb__tap mono" data-wb-tap hidden><svg><use href="#i-full" /></svg><span data-i18n="wb.tapEdit">Tap to edit</span></button>
+          </div>
 
-          <!-- right: outliner, properties, print check -->
-          <aside class="wb__side" data-wb-side>
-            <section class="wb__panel wb__panel--list">
-              <h4 class="wb__ph mono"><span data-i18n="wb.outliner">Objects</span><span data-wb-count></span></h4>
-              <ul class="wb__outliner" data-wb-outliner></ul>
+          <!-- Outliner + Properties, like Blender's right-hand editors -->
+          <aside class="wb__right" data-wb-right>
+            <section class="wb__outl">
+              <div class="wb__ehdr"><svg><use href="#b-outliner" /></svg><input type="search" placeholder="Search" data-wb-search aria-label="Search objects" /></div>
+              <ul class="wb__tree" data-wb-tree></ul>
             </section>
-
-            <section class="wb__panel" data-wb-props>
-              <h4 class="wb__ph mono"><span data-wb-selname data-i18n="wb.none">Click a shape to select it</span></h4>
-              <div class="wb__edit" data-wb-edit hidden>
-                <span class="wb__label mono" data-i18n="wb.loc">Location (mm)</span>
-                <div class="wb__xyz mono">
-                  <label><b class="ax-x">X</b><input type="number" step="1" data-wb-f="px" /></label>
-                  <label><b class="ax-y">Y</b><input type="number" step="1" data-wb-f="py" /></label>
-                  <label><b class="ax-z">Z</b><input type="number" step="1" data-wb-f="pz" /></label>
-                </div>
-                <span class="wb__label mono" data-i18n="wb.rot">Rotation (°)</span>
-                <div class="wb__xyz mono">
-                  <label><b class="ax-x">X</b><input type="number" step="15" data-wb-f="rx" /></label>
-                  <label><b class="ax-y">Y</b><input type="number" step="15" data-wb-f="ry" /></label>
-                  <label><b class="ax-z">Z</b><input type="number" step="15" data-wb-f="rz" /></label>
-                </div>
-                <span class="wb__label mono"><span data-i18n="wb.size">Size (mm)</span>
-                  <button class="wb__lock" data-wb-lock aria-pressed="false" data-tip="wb.lock"><svg><use href="#i-lock" /></svg></button>
-                </span>
-                <div class="wb__xyz mono">
-                  <label><b class="ax-x">X</b><input type="number" min="0.5" step="1" data-wb-f="sx" /></label>
-                  <label><b class="ax-y">Y</b><input type="number" min="0.5" step="1" data-wb-f="sy" /></label>
-                  <label><b class="ax-z">Z</b><input type="number" min="0.5" step="1" data-wb-f="sz" /></label>
-                </div>
-                <span class="wb__label mono" data-i18n="wb.colour">Colour</span>
-                <div class="swatches swatches--small" data-wb-colors></div>
-                <div class="wb__actions">
-                  <button class="wbtn" data-wb-act="dup" data-tip="wb.dup" data-key="⇧D"><svg><use href="#i-copy" /></svg></button>
-                  <button class="wbtn" data-wb-act="drop" data-tip="wb.drop"><svg><use href="#i-down" /></svg></button>
-                  <button class="wbtn" data-wb-act="frame" data-tip="wb.frame" data-key="F"><svg><use href="#i-frame" /></svg></button>
-                  <button class="wbtn wbtn--danger" data-wb-act="del" data-tip="wb.del" data-key="X"><svg><use href="#i-trash" /></svg></button>
-                </div>
-              </div>
-            </section>
-
-            <section class="wb__panel wb__check" data-wb-check>
-              <h4 class="wb__ph mono" data-i18n="wb.check">Print check</h4>
-              <ul class="wb__checklist" data-wb-checklist></ul>
-              <p class="wb__est mono" data-wb-est></p>
-              <div class="wb__checkopts">
-                <button class="wbtn" data-wb-toggle="over" aria-pressed="true"><span data-i18n="wb.overhangs">Show overhangs</span></button>
-                <button class="wbtn" data-wb-toggle="turn" aria-pressed="true"><span data-i18n="wb.turn">Turntable</span></button>
-              </div>
+            <section class="wb__props">
+              <nav class="wb__ptabs">
+                <button data-ptab="object" aria-pressed="true" title="Object"><svg><use href="#b-objprop" /></svg></button>
+                <button data-ptab="material" aria-pressed="false" title="Material"><svg><use href="#b-material" /></svg></button>
+                <button data-ptab="print" aria-pressed="false" title="Print"><svg><use href="#i-print" /></svg></button>
+              </nav>
+              <div class="wb__pbody" data-wb-pbody></div>
             </section>
           </aside>
-
-          <!-- bottom status bar -->
-          <footer class="wb__foot">
-            <button class="wbtn wbtn--icon" data-wb-act="undo" data-tip="wb.undo" data-key="Ctrl+Z"><svg><use href="#i-undo" /></svg></button>
-            <button class="wbtn wbtn--icon" data-wb-act="redo" data-tip="wb.redo" data-key="Ctrl+Y"><svg><use href="#i-redo" /></svg></button>
-            <span class="wb__sep"></span>
-            <label class="wb__snap wbtn" data-tip="wb.snap"><svg><use href="#i-magnet" /></svg>
-              <select data-wb-snap aria-label="Snap">
-                <option value="0" data-i18n="wb.off">Off</option>
-                <option value="1">1 mm</option>
-                <option value="5" selected>5 mm</option>
-                <option value="10">10 mm</option>
-              </select>
-            </label>
-            <button class="wbtn" data-wb-toggle="bed" aria-pressed="true" data-tip="wb.bedTip"><svg><use href="#i-down" /></svg><span data-i18n="wb.bed">Keep on bed</span></button>
-            <span class="wb__grow"></span>
-            <div class="wb__views mono" role="group" aria-label="View">
-              <button data-wb-view="persp" data-key="0" data-i18n="wb.persp">Persp</button>
-              <button data-wb-view="top" data-key="7" data-i18n="wb.top">Top</button>
-              <button data-wb-view="front" data-key="1" data-i18n="wb.front">Front</button>
-              <button data-wb-view="right" data-key="3" data-i18n="wb.right">Right</button>
-            </div>
-          </footer>
-
-          <p class="wb__keys mono" data-i18n="wb.keys">G move · R rotate · S scale · X delete · Shift+D duplicate · F frame · Tab preview · Ctrl+Z undo</p>
-          <div class="wb__tip mono" data-wb-tipbox hidden></div>
-          <div class="wb__toast mono" data-wb-toast role="status"></div>
-          <button class="bigbtn bigbtn--dark mono" data-wb-open hidden><span data-i18n="wb.open">▶ Open Workbench</span><small data-i18n="wb.openSmall">Loads the 3D editor</small></button>
-          <button class="wb__tap mono" data-wb-tap hidden><svg><use href="#i-full" /></svg><span data-i18n="wb.tapEdit">Tap to edit</span></button>
         </div>
+        <input type="file" accept=".stl" data-wb-import hidden />
       </div>
     </section>
 
@@ -451,10 +414,10 @@
   </dialog>
 
   <script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }</script>
-  <script src="js/i18n.js?v=6"></script>
-  <script src="js/data.js?v=6"></script>
-  <script src="js/main.js?v=6"></script>
-  <script type="module" src="js/printbed.js?v=6"></script>
-  <script type="module" src="js/workbench.js?v=6"></script>
+  <script src="js/i18n.js?v=7"></script>
+  <script src="js/data.js?v=7"></script>
+  <script src="js/main.js?v=7"></script>
+  <script type="module" src="js/printbed.js?v=7"></script>
+  <script type="module" src="js/workbench.js?v=7"></script>
 </body>
 </html>
